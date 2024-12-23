@@ -1,0 +1,33 @@
+<head th:fragments="head">
+    <meta charset="UTF-8">
+    <title>Hotel Campus</title>
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+    <script th:src="@{/Scripts/navbar.js}"></script>
+</head>
+
+<nav th:fragment="navbar">
+    <nav>
+        <div class="logo"><img src="images/logo.png" alt="Logo"></div>
+        <div class="menu">
+
+            <ul id="menu__content" class="menustandard">
+                <li class="underlineAnimation" id="home"><a href="#" >Home</a></li>
+                <li class="underlineAnimation" id="prenotaOra"><a href="#">Prenota ora</a></li>
+                <li class="underlineAnimation" id="servizi"><a href="#" >Servizi</a></li>
+            </ul>
+        </div>
+
+        <div class="login">
+
+            <a href="#">login</a>
+
+            <div id="burger__menu" onclick="showMenu()" class="">
+
+                <i class="ri-menu-line burger__menu__view" ></i>
+                <i class="ri-close-line burger__menu__close" ></i>
+            </div>
+        </div>
+
+    </nav>
+</nav>
