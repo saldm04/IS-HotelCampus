@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <div th:replace="Fragments/general :: head"></div>
+
+    <head>
+        <link rel="stylesheet" th:href="@{/css/prenotaOra.css}"/>
+    </head>
+
+    <body>
+        <nav th:replace="Fragments/general :: navbar"></nav>
+
+        <div class="formContainer">
+            <form method="post" id="dateForm" action="CamereDisponibiliPrenotazione">
+                <label for="checkindate">Check in: <input type="date" id="checkindate" name="checkindate" required/></label>
+                <label for="checkoutdate">Check out: <input type="date" id="checkoutdate" name="checkoutdate" required /></label>
+                <label for="numOspiti">Numero di ospiti: <input type="number" id="numOspiti" name="numOspiti" min="1" required/></label>
+                <input type="submit" value="Verifica disponibilità">
+            </form>
+        </div>
+
+        <div class="cameraContainer" th:each="camera : ${camere}">
+            <div class="immagini">
+                <img th:src="${camera.getImmagine()}" alt="Immagine camera">
+            </div>
+            <div class="info">
+                <h1>Tipologia camera:</h1><span th:text="${camera.getTipo()}"></span>
+                <h1>Numero massimo di ospiti:</h1><span th:text="${camera.getNumeroMaxOspiti()}"></span>
+                <h1>Costo per notte:</h1><span th:text="${camera.getCosto()}"></span>
+            </div>
+        </div>
+    </body>
+</html>
