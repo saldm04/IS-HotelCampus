@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Fragments/general :: head"></div>
+<head>
+  <link rel="stylesheet" th:href="@{/CSS/signIn.css}" type="text/css">
+  <script th:src="@{/Scripts/validate.js}"></script>
+</head>
+<body>
+  <nav th:replace="Fragments/general :: navbar"></nav>
+  <section>
+    <div class="center">
+      <img th:src="@{/Images/logo.png}" alt="logo" />
+      <span><a th:href="@{/utenti/login}">Accedi /</a> Registrati </span>
+
+      <form th:action="@{/utenti/signIn}" method="post" id="regForm">
+        <fieldset>
+          <legend>Anagrafica</legend>
+          <input
+                  id="nome"
+                  type="text"
+                  name="nome"
+                  placeholder="Inserisci nome"
+                  required
+                  onchange="validateFormElem(this, nomeCognomeNazionalitaPattern, document.getElementById('errorNome'), nomeErrorMessage)"
+          />
+          <br />
+          <input
+                  id="cognome"
+                  type="text"
+                  name="cognome"
+                  placeholder="Inserisci cognome"
+                  required
+                  onchange="validateFormElem(this, nomeCognomeNazionalitaPattern, document.getElementById('errorCognome'), cognomeErrorMessage)"
+          />
+          <br />
+          <input
+                  id="dataNascita"
+                  type="date"
+                  name="dataNascita"
+                  min="1900-01-01"
+                  th:attr="max=${currentDate}"
+                  required
+          />
+          <br />
+
+
+          <input
+                  id="nazionalita"
+                  type="text"
+                  name="nazionalita"
+                  placeholder="Inserisci nazionalità"
+                  required
+                  oninput="cercaNazionalita()"
+                  onchange="validateFormElem(this, nomeCognomeNazionalitaPattern, document.getElementById('errorNazionalita'), nazionalitaErrorMessage)"
+          />
+          <br/>
+          <div class="suggerimentiNazione">
+          </div>
+          <br />
+        </fieldset>
+
+        <br />
+        <fieldset>
+          <legend>Credenziali</legend>
+          <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="Inserisci email"
+                  required
+                  onchange="validateFormElem(this, emailPattern, document.getElementById('errorEmail'), emailErrorMessage)"
+          />
+          <br />
+
+          <input
+                  id="password"
+                  type="password"
+                  name="password"
+                  placeholder="Inserisci password"
+                  required
+                  onchange="validateFormElem(this, passwordPattern, document.getElementById('errorPassword'), passwordErrorMessage)"
+          />
+          <br />
+        </fieldset>
+
+        <div class="divErrorSpan">
+          <span id="errorNome"></span>
+          <span id="errorCognome"></span>
+          <span id="errorNazionalita"></span>
+          <span id="errorEmail"></span>
+          <span id="errorPassword"></span>
+          <span id="generalError" style="color: red" th:text="${generalError}"></span>
+        </div>
+
+        <input type="submit" value="Registrati" onclick="return validate()"/>
+      </form>
+    </div>
+  </section>
+</body>
+</html>

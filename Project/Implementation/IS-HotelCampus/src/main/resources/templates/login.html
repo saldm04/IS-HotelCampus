@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Fragments/general :: head"></div>
+<head>
+    <link rel="stylesheet" th:href="@{/CSS/login.css}" type="text/css">
+    <script th:src="@{Scripts/validate.js}"></script>
+</head>
+<body>
+    <nav th:replace="Fragments/general :: navbar"></nav>
+    <section>
+        <div class="center">
+            <img th:src="@{/Images/logo.png}" alt="logo" />
+            <span>Accedi <a th:href="@{/utenti/signIn}">/ Registrati</a></span>
+
+            <form th:action="@{/utenti/login}" method="post" id="formLogin">
+                <input
+                        id="email"
+                        class="email"
+                        type="email"
+                        name="email"
+                        placeholder="Inserisci email"
+                        onchange="validateFormElem(this, emailPattern, document.getElementById('errorEmail'), emailErrorMessage)"
+                />
+                <br />
+
+                <input
+                        id="password"
+                        class="password"
+                        type="password"
+                        name="password"
+                        placeholder="Inserisci password"
+                        onchange="validateFormElem(this, passwordPattern, document.getElementById('errorPassword'), passwordErrorMessage)"
+                />
+                <br />
+
+                <div id="errorDiv">
+                    <span id="errorEmail"></span>
+                    <span id="errorPassword"></span>
+                    <span id="generalError" style="color: red" th:text="${generalError}"></span>
+                </div>
+
+                <input type="submit" value="Login" onclick="return validateLogin()"/>
+            </form>
+
+        </div>
+    </section>
+</body>
+</html>
