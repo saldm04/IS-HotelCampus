@@ -2,18 +2,20 @@ package it.unisa.hotelcampus.gestionecamere.service;
 
 import it.unisa.hotelcampus.model.dao.CameraRepository;
 import it.unisa.hotelcampus.model.entity.Camera;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class GestioneCamereServiceImpl implements GestioneCamereService {
 
-    @Autowired
-    private CameraRepository cameraRepository;
+    private final CameraRepository cameraRepository;
+
+
+    public GestioneCamereServiceImpl(CameraRepository cameraRepository) {
+        this.cameraRepository = cameraRepository;
+    }
 
     @Override
     public Collection<Camera> getCamere() {
@@ -32,7 +34,19 @@ public class GestioneCamereServiceImpl implements GestioneCamereService {
 
     @Override
     public Collection<Camera> getCamereDisponibili(Date checkIn, Date checkOut, int numeroOspiti) {
-        return List.of();
+        if (checkIn == null || checkOut == null) {
+            throw new IllegalArgumentException("Le date di check-in e check-out non possono essere nulle");
+        }
+
+        if (checkIn.after(checkOut)) {
+            throw new IllegalArgumentException("La data di check-in non può essere successiva alla data di check-out");
+        }
+
+        if (numeroOspiti <= 0) {
+            throw new IllegalArgumentException("Il numero di ospiti deve essere maggiore di 0");
+        }
+
+        return cameraRepository.findCamereDisponibili(checkIn, checkOut, numeroOspiti);
     }
 
     @Override

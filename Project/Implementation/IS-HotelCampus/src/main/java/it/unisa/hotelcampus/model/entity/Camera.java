@@ -1,43 +1,42 @@
 package it.unisa.hotelcampus.model.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
 
-/*
- * @author Luca
- */
+import java.util.Set;
 
 @Entity
-@NoArgsConstructor
-@RequiredArgsConstructor
 public class Camera {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NonNull
+    @Column(nullable = false)
     private int numero;
 
-    @Enumerated(EnumType.STRING) @NonNull
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TipoCamera tipo;
 
-    @NonNull
+    @Column(nullable = false)
     private int numeroMaxOspiti;
 
-    @NonNull
+    @Column(nullable = false)
     private int quadratura;
 
-    @NonNull
+    @Column(nullable = false)
     private int costo;
 
-    @NonNull
+    @Column(nullable = false)
     private String immagine;
 
     @Column(nullable = false)
     private boolean isDeleted;
 
-    public enum TipoCamera{
+    @OneToMany
+    private Set<Prenotazione> prenotazioni;
+
+    public enum TipoCamera {
         STANDARD,
         DELUXE,
         LUXURY,
@@ -45,43 +44,74 @@ public class Camera {
     }
 
 
-    public @NonNull TipoCamera getTipo() {
+    public Camera() {
+    }
+
+
+    public Camera(int numero, TipoCamera tipo, int numeroMaxOspiti, int quadratura, int costo, String immagine) {
+        this.numero = numero;
+        this.tipo = tipo;
+        this.numeroMaxOspiti = numeroMaxOspiti;
+        this.quadratura = quadratura;
+        this.costo = costo;
+        this.immagine = immagine;
+        this.isDeleted = false;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public TipoCamera getTipo() {
         return tipo;
     }
 
-    public void setTipo(@NonNull TipoCamera tipo) {
+    public void setTipo(TipoCamera tipo) {
         this.tipo = tipo;
     }
 
-    public @NonNull int getNumeroMaxOspiti() {
+    public int getNumeroMaxOspiti() {
         return numeroMaxOspiti;
     }
 
-    public void setNumeroMaxOspiti(@NonNull int numeroMaxOspiti) {
+    public void setNumeroMaxOspiti(int numeroMaxOspiti) {
         this.numeroMaxOspiti = numeroMaxOspiti;
     }
 
-    public @NonNull int getQuadratura() {
+    public int getQuadratura() {
         return quadratura;
     }
 
-    public void setQuadratura(@NonNull int quadratura) {
+    public void setQuadratura(int quadratura) {
         this.quadratura = quadratura;
     }
 
-    public @NonNull int getCosto() {
+    public int getCosto() {
         return costo;
     }
 
-    public void setCosto(@NonNull int costo) {
+    public void setCosto(int costo) {
         this.costo = costo;
     }
 
-    public @NonNull String getImmagine() {
+    public String getImmagine() {
         return immagine;
     }
 
-    public void setImmagine(@NonNull String immagine) {
+    public void setImmagine(String immagine) {
         this.immagine = immagine;
     }
 
@@ -89,7 +119,7 @@ public class Camera {
         return isDeleted;
     }
 
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }
