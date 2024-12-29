@@ -2,32 +2,52 @@
     <meta charset="UTF-8">
     <title>Hotel Campus</title>
     <meta name="viewport" content="initial-scale=1, width=device-width">
+    <link rel="stylesheet" th:href="@{/CSS/fontFamily.css}">
     <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
     <script th:src="@{/Scripts/navbar.js}"></script>
 </head>
 
-<nav th:fragment="navbar">
-    <nav>
-        <div class="logo"><img th:src="@{/Images/logo.png}" alt="Logo"></div>
-        <div class="menu">
+<html th:fragment="navbar">
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"/>
+    </head>
+    <body onload="switchElement('<%=x%>')">
+        <nav>
+            <div class="logo"><img th:src="@{/Images/logo.png}" alt="Logo"></div>
+            <div class="menu">
 
-            <ul id="menu__content" class="menustandard">
-                <li class="underlineAnimation" id="home"><a href="/">Home</a></li>
-                <li class="underlineAnimation" id="prenotaOra"><a th:href="@{/camere/prenota}">Prenota ora</a></li>
-                <li class="underlineAnimation" id="servizi"><a href="#">Servizi</a></li>
-            </ul>
-        </div>
+                <ul id="menu__content" class="menustandard">
+                    <li class="underlineAnimation" id="home"><a href="/">Home</a></li>
+                    <li class="underlineAnimation" id="prenotaOra"><a th:href="@{/camere/prenota}">Prenota ora</a></li>
+                    <li class="underlineAnimation" id="servizi"><a href="#">Servizi</a></li>
+                </ul>
+            </div>
 
-        <div class="login">
-
-            <a th:href="@{/utenti/login}">login</a>
+            <div class="login">
+                <div th:if="${utente == null}">
+                    <a th:href="@{/utenti/login}">Login</a>
+                </div>
+                <div th:if="${utente != null}">
+                    <div th:if="${utente.ruolo.name() == 'CLIENTE'}">
+                        <a href="#"><img alt="Cliente" th:src="@{/Images/user.png}"></a>
+                    </div>
+                    <div th:if="${utente.ruolo.name() == 'DIRETTORE'}">
+                        <a href="#"><img alt="Direttore" th:src="@{/Images/user.png}"></a>
+                    </div>
+                    <div th:if="${utente.ruolo.name() == 'GESTOREPRENOTAZIONI'}">
+                        <a href="#"><img alt="Gestore prenotazioni" th:src="@{/Images/user.png}"></a>
+                    </div>
+                    <a th:href="@{/utenti/logout}">Logout</a>
+                </div>
+            </div>
 
             <div id="burger__menu" onclick="showMenu()" class="">
 
-                <i class="ri-menu-line burger__menu__view"></i>
-                <i class="ri-close-line burger__menu__close"></i>
+                    <i class="ri-menu-line burger__menu__view"></i>
+                    <i class="ri-close-line burger__menu__close"></i>
             </div>
-        </div>
 
-    </nav>
-</nav>
+        </nav>
+        <div id="oscuraSfondo" class="oscuraSfondo"></div>
+    </body>
+</html>

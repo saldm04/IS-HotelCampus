@@ -22,7 +22,7 @@
                    th:value="${checkOut != null ? checkOut : ''}"/>
         </label>
         <label for="numOspiti">Numero di ospiti:
-            <input type="number" id="numOspiti" name="numOspiti" min="1" required
+            <input type="number" id="numOspiti" name="numOspiti" min="1" th:max="${maxOspiti}" required
                    th:value="${numeroOspiti != null ? numeroOspiti : ''}"/>
         </label>
         <input type="submit" value="Verifica disponibilità">
@@ -41,9 +41,9 @@
         <h1>Tipologia camera:</h1><span th:text="${camera.getTipo()}"></span>
         <h1>Numero massimo di ospiti:</h1><span th:text="${camera.getNumeroMaxOspiti()}"></span>
         <h1>Costo per notte:</h1><span th:text="${camera.getCosto()}"></span>
-        <form method="post" action="#" id="addCartForm" th:if="${ricercaEffettuata}">
+        <form method="post" th:action="@{/prenotazione/finalizza}" id="addCartForm" th:if="${ricercaEffettuata}">
             <input type="hidden" name="numeroCamera" th:value="${camera.getId()}"/>
-            <input type="submit" value="Aggiungi al carrello"/>
+            <input type="submit" value="Prenota ora"/>
         </form>
     </div>
 </div>

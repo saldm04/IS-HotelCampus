@@ -12,14 +12,14 @@ import java.util.Date;
 
 
 @Repository
-public interface CameraRepository extends JpaRepository<Camera, Integer> {
+public interface CameraRepository extends JpaRepository<Camera, Long> {
 
     Collection<Camera> findCameraByisDeletedIsFalse();
 
     @Query("""
         SELECT c 
         FROM Camera c 
-        WHERE c.numeroMaxOspiti <= :numeroOspiti
+        WHERE c.numeroMaxOspiti >= :numeroOspiti
           AND c.isDeleted = false
           AND c.id NOT IN (
               SELECT p.camera.id 

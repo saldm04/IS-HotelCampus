@@ -3,8 +3,11 @@ package it.unisa.hotelcampus.gestionecamere.controller;
 import it.unisa.hotelcampus.gestionecamere.service.GestioneCamereService;
 
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
+import it.unisa.hotelcampus.model.entity.Camera;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -30,7 +33,10 @@ public class CameraController {
 
     @GetMapping("/prenota")
     public String mostraCamere(Model model){
-        model.addAttribute("camere", gestioneCamereService.getCamere());
+        Collection<Camera> camere = gestioneCamereService.getCamere();
+        int maxOspiti = camere.stream().mapToInt(Camera::getNumeroMaxOspiti).max().orElse(1);
+        model.addAttribute("camere", camere);
+        model.addAttribute("maxOspiti", maxOspiti);
         return "prenotaOra";
     }
 
@@ -49,6 +55,9 @@ public class CameraController {
             model.addAttribute("checkOut", checkOut != null ? dateFormat.format(checkOut) : "");
             model.addAttribute("numeroOspiti", numeroOspiti);
             model.addAttribute("ricercaEffettuata", true);
+            Collection<Camera> camere = gestioneCamereService.getCamere();
+            int maxOspiti = camere.stream().mapToInt(Camera::getNumeroMaxOspiti).max().orElse(1);
+            model.addAttribute("maxOspiti", maxOspiti);
         }catch (IllegalArgumentException e){
             model.addAttribute("generalError", e.getMessage());
             mostraCamere(model);

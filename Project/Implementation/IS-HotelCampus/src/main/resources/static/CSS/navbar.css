@@ -63,19 +63,22 @@ nav .login {
 	display: flex;
 	align-items: center;
 	margin: 0 2.5% 0 0;
+
+	column-gap: 10px; /* Spaziatura tra l'immagine e il link */
 }
 
 nav .login img {
 	height: 28px;
+
+	cursor: pointer; /* Mostra il cursore pointer quando si passa sopra */
+	scale: 1; /* Evita effetti indesiderati */
+	transition: scale 0.2s ease; /* Animazione per hover */
 }
 
 nav .login img:hover {
 	cursor:pointer;
-	scale: 1.05;
-}
 
-nav .login{
-	column-gap: 20px ;
+	scale: 1.1; /* Aggiungi un leggero zoom al passaggio del mouse */
 }
 
 nav .underline {

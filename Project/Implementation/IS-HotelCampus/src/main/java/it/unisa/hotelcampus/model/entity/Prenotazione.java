@@ -3,11 +3,13 @@ package it.unisa.hotelcampus.model.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Prenotazione {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Long id;
 
     @Column(nullable = false)
@@ -29,9 +31,24 @@ public class Prenotazione {
     private int costoUnitarioCamera;
 
     @ManyToOne
+    @JoinColumn(name = "camera_id", nullable = false) // Foreign Key
     private Camera camera;
 
+    @OneToMany
+    private Set<ServizioPrenotato> serviziPrenotati;
+
     public Prenotazione() {}
+
+    public Prenotazione(Date dataPrenotazione, Date dataCheckIn, Date dataCheckOut, int numeroOspiti, int importoTotale, int costoUnitarioCamera, Camera camera, Set<ServizioPrenotato> serviziPrenotati) {
+        this.dataPrenotazione = dataPrenotazione;
+        this.dataCheckIn = dataCheckIn;
+        this.dataCheckOut = dataCheckOut;
+        this.numeroOspiti = numeroOspiti;
+        this.importoTotale = importoTotale;
+        this.costoUnitarioCamera = costoUnitarioCamera;
+        this.camera = camera;
+        this.serviziPrenotati = serviziPrenotati;
+    }
 
     public Long getId() {
         return id;
@@ -97,4 +114,11 @@ public class Prenotazione {
         this.camera = camera;
     }
 
+    public Set<ServizioPrenotato> getServiziPrenotati() {
+        return serviziPrenotati;
+    }
+
+    public void addServizioPrenotato(ServizioPrenotato servizioPrenotato) {
+        this.serviziPrenotati.add(servizioPrenotato);
+    }
 }

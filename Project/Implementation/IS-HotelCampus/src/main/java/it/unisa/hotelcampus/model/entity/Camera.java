@@ -2,6 +2,7 @@ package it.unisa.hotelcampus.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -9,9 +10,10 @@ public class Camera {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private int numero;
 
     @Enumerated(EnumType.STRING)
@@ -56,6 +58,7 @@ public class Camera {
         this.costo = costo;
         this.immagine = immagine;
         this.isDeleted = false;
+        this.prenotazioni = new HashSet<>();
     }
 
 
@@ -121,5 +124,13 @@ public class Camera {
 
     public void setDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    public Set<Prenotazione> getPrenotazioni() {
+        return prenotazioni;
+    }
+
+    public void addPrenotazione(Prenotazione prenotazione) {
+        this.prenotazioni.add(prenotazione);
     }
 }
