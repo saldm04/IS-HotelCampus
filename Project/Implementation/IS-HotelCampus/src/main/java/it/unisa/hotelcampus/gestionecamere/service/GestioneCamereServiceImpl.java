@@ -1,6 +1,7 @@
 package it.unisa.hotelcampus.gestionecamere.service;
 
 import it.unisa.hotelcampus.model.dao.CameraRepository;
+import it.unisa.hotelcampus.model.dao.PrenotazioneRepository;
 import it.unisa.hotelcampus.model.entity.Camera;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,12 @@ import java.util.Date;
 public class GestioneCamereServiceImpl implements GestioneCamereService {
 
     private final CameraRepository cameraRepository;
+    private final PrenotazioneRepository prenotazioneRepository;
 
 
-    public GestioneCamereServiceImpl(CameraRepository cameraRepository) {
+    public GestioneCamereServiceImpl(CameraRepository cameraRepository, PrenotazioneRepository prenotazioneRepository) {
         this.cameraRepository = cameraRepository;
+        this.prenotazioneRepository = prenotazioneRepository;
     }
 
     @Override
@@ -51,6 +54,10 @@ public class GestioneCamereServiceImpl implements GestioneCamereService {
 
     @Override
     public boolean verificaDisponibilita(Camera camera, Date checkIn, Date checkOut) {
-        return false;
+        return !prenotazioneRepository.existsPrenotazione(
+                camera.getId(),
+                checkIn,
+                checkOut
+        );
     }
 }

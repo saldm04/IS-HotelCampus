@@ -1,8 +1,6 @@
 package it.unisa.hotelcampus.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.sql.Date;
 
@@ -23,6 +21,9 @@ public class Utente {
     private String nazionalita;
     @Column(nullable = false)
     private Ruolo ruolo;
+
+    @OneToOne(mappedBy = "utente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ClienteDettagli clienteDettagli;
 
     public Utente() {
     }

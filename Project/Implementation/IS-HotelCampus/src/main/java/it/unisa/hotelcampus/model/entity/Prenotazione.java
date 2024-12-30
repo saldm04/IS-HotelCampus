@@ -3,6 +3,7 @@ package it.unisa.hotelcampus.model.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,23 +32,28 @@ public class Prenotazione {
     private int costoUnitarioCamera;
 
     @ManyToOne
-    @JoinColumn(name = "camera_id", nullable = false) // Foreign Key
+    @JoinColumn(name = "camera_id", nullable = false)
     private Camera camera;
 
     @OneToMany
-    private Set<ServizioPrenotato> serviziPrenotati;
+    private List<ServizioPrenotato> serviziPrenotati;
+
+    @ManyToOne
+    @JoinColumn(name = "email", nullable = false)
+    private ClienteDettagli cliente;
 
     public Prenotazione() {}
 
-    public Prenotazione(Date dataPrenotazione, Date dataCheckIn, Date dataCheckOut, int numeroOspiti, int importoTotale, int costoUnitarioCamera, Camera camera, Set<ServizioPrenotato> serviziPrenotati) {
+    public Prenotazione(Date dataPrenotazione, Date dataCheckIn, Date dataCheckOut, int numeroOspiti, Camera camera, List<ServizioPrenotato> serviziPrenotati, ClienteDettagli cliente) {
         this.dataPrenotazione = dataPrenotazione;
         this.dataCheckIn = dataCheckIn;
         this.dataCheckOut = dataCheckOut;
         this.numeroOspiti = numeroOspiti;
-        this.importoTotale = importoTotale;
-        this.costoUnitarioCamera = costoUnitarioCamera;
+        this.importoTotale = camera.getCosto() + serviziPrenotati.stream().mapToInt(s -> s.getNumeroServizi()* s.getCostoUnitario()).sum();
+        this.costoUnitarioCamera = camera.getCosto();
         this.camera = camera;
         this.serviziPrenotati = serviziPrenotati;
+        this.cliente = cliente;
     }
 
     public Long getId() {
@@ -94,10 +100,6 @@ public class Prenotazione {
         return importoTotale;
     }
 
-    public void setImportoTotale(int importoTotale) {
-        this.importoTotale = importoTotale;
-    }
-
     public int getCostoUnitarioCamera() {
         return costoUnitarioCamera;
     }
@@ -114,7 +116,7 @@ public class Prenotazione {
         this.camera = camera;
     }
 
-    public Set<ServizioPrenotato> getServiziPrenotati() {
+    public List<ServizioPrenotato> getServiziPrenotati() {
         return serviziPrenotati;
     }
 
