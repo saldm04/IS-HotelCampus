@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+div.containerServizi {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+}
+
+
+.testoIniziale {
+    margin-top: 110px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.testoIniziale h1 {
+    text-align: center;
+    color: #a26f5c;
+    font-weight: 900;
+    font-size: clamp(17px, 1.87vw, 200px);
+}
+
+.servizi {
+    row-gap: 20px;
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding-bottom: 40px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: clamp(400px, 49%, 50%);
+    border: 1px solid #214001;
+    border-radius: 15px;
+}
+
+.card img {
+    width: 100%;
+    height: 300px;
+    display: block;
+    object-fit: cover;
+    border-radius: 15px 15px 0px 0px;
+    border-bottom: 2px #214001 solid;
+}
+
+.card h1 {
+    color: #50731d;
+    padding-left: 10px;
+    font-size: clamp(15px, 1.4vw, 200px);
+}
+
+.card p {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: left;
+    font-size: clamp(14.5px, 1.3vw, 200px);
+}
+
+.card span {
+    color: #6a84439f;
+    padding-left: 10px;
+    margin-top: auto;
+    padding-bottom: 20px;
+    font-size: clamp(14.5px, 1.3vw, 200px);
+    font-weight: bold;
+}
+
+@media screen and (max-width: 1000px) {
+    .card {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        border: 1px solid #214001;
+        border-radius: 15px;
+    }
+}

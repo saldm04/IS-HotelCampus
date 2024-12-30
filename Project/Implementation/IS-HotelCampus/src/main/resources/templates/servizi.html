@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Fragments/general :: head"></div>
+<head>
+    <link rel="stylesheet" th:href="@{/CSS/servizi.css}" type="text/css">
+</head>
+<body>
+<nav th:replace="Fragments/general :: navbar"></nav>
+<div class=containerServizi>
+    <section class="testoIniziale">
+        <h1>
+            Benvenuti all'Hotel Campus, dove l'ospitalità incontra il comfort e
+            l'eleganza. <br/>
+            <br/>Qui offriamo una gamma completa di servizi per rendere il vostro
+            soggiorno indimenticabile:
+        </h1>
+    </section>
+
+    <section class="servizi">
+
+        <div th:each="servizio : ${servizi}" class="card">
+            <img th:src="@{'/' + ${servizio.getImmagine()}}" alt="Immagine Servizio">
+            <h1 th:text="${servizio.getNome()}"></h1>
+            <p th:text="${servizio.getDescrizione()}"><%= bean.getDescrizione()%></p>
+            <span th:text="'Costo per persona: ' + ${servizio.getCosto()} + '€'"></span>
+        </div>
+
+
+    </section>
+</div>
+</body>
+</html>
