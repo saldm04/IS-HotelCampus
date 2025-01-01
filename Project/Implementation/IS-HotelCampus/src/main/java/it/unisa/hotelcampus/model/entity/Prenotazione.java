@@ -3,7 +3,6 @@ package it.unisa.hotelcampus.model.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,9 +16,11 @@ public class Prenotazione {
     private Date dataPrenotazione;
 
     @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date dataCheckIn;
 
     @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date dataCheckOut;
 
     @Column(nullable = false)
@@ -35,8 +36,8 @@ public class Prenotazione {
     @JoinColumn(name = "camera_id", nullable = false)
     private Camera camera;
 
-    @OneToMany
-    private List<ServizioPrenotato> serviziPrenotati;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ServizioPrenotato> serviziPrenotati;
 
     @ManyToOne
     @JoinColumn(name = "email", nullable = false)
@@ -44,7 +45,7 @@ public class Prenotazione {
 
     public Prenotazione() {}
 
-    public Prenotazione(Date dataPrenotazione, Date dataCheckIn, Date dataCheckOut, int numeroOspiti, Camera camera, List<ServizioPrenotato> serviziPrenotati, ClienteDettagli cliente) {
+    public Prenotazione(Date dataPrenotazione, Date dataCheckIn, Date dataCheckOut, int numeroOspiti, Camera camera, Set<ServizioPrenotato> serviziPrenotati, ClienteDettagli cliente) {
         this.dataPrenotazione = dataPrenotazione;
         this.dataCheckIn = dataCheckIn;
         this.dataCheckOut = dataCheckOut;
@@ -116,7 +117,7 @@ public class Prenotazione {
         this.camera = camera;
     }
 
-    public List<ServizioPrenotato> getServiziPrenotati() {
+    public Set<ServizioPrenotato> getServiziPrenotati() {
         return serviziPrenotati;
     }
 

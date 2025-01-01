@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="Fragments/general :: head"></div>
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/conferma.css}"/>
+</head>
+
+<body>
+<nav th:replace="Fragments/general :: navbar"></nav>
+
+<!-- Aggiunto per spaziare il contenuto -->
+<br><br><br><br><br>
+
+<div class="container">
+    <h1>Prenotazione Confermata</h1>
+    <p>Grazie per aver effettuato la prenotazione!</p>
+    <p>Il tuo numero di prenotazione è: <strong th:text="${prenotazione.id}">12345</strong></p>
+    <a href="/" class="btn btn-primary">Torna alla Home</a>
+</div>
+</body>
+</html>

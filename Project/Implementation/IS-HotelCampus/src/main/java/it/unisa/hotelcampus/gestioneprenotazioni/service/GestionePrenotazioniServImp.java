@@ -2,34 +2,39 @@ package it.unisa.hotelcampus.gestioneprenotazioni.service;
 
 
 import it.unisa.hotelcampus.gestionecamere.service.GestioneCamereServiceImpl;
+import it.unisa.hotelcampus.model.dao.CameraRepository;
 import it.unisa.hotelcampus.model.dao.ClienteDettagliRepository;
 import it.unisa.hotelcampus.model.dao.PrenotazioneRepository;
-import it.unisa.hotelcampus.model.dao.UtenteRepository;
 import it.unisa.hotelcampus.model.entity.Camera;
 import it.unisa.hotelcampus.model.entity.ClienteDettagli;
 import it.unisa.hotelcampus.model.entity.Prenotazione;
 import it.unisa.hotelcampus.model.entity.ServizioPrenotato;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
-public class GestionePrenotazioniImpl implements GestionePrenotazioniService {
+@Service
+public class GestionePrenotazioniServImp implements GestionePrenotazioniService {
 
 
   private PrenotazioneRepository prenotazioneRepository;
   private GestioneCamereServiceImpl gestioneCamereService;
   private ClienteDettagliRepository clienteDettagliRepository;
+  private CameraRepository cameraRepository;
 
-  public GestionePrenotazioniImpl(final GestioneCamereServiceImpl gestioneCamereService,
-                                  final PrenotazioneRepository prenotazioneRepository,
-                                  final ClienteDettagliRepository clienteDettagliRepository
+  public GestionePrenotazioniServImp(final GestioneCamereServiceImpl gestioneCamereService,
+                                     final PrenotazioneRepository prenotazioneRepository,
+                                     final ClienteDettagliRepository clienteDettagliRepository,
+                                     final CameraRepository cameraRepository
                                   ) {
 
     this.gestioneCamereService = gestioneCamereService;
     this.prenotazioneRepository = prenotazioneRepository;
     this.clienteDettagliRepository = clienteDettagliRepository;
-
+    this.cameraRepository = cameraRepository;
   }
 
   @Override
@@ -38,27 +43,27 @@ public class GestionePrenotazioniImpl implements GestionePrenotazioniService {
   }
 
   @Override
-  public Prenotazione creaPrenotazione(Date dataCheckIn, Date dataCheckOut, int numeroOspiti, Camera camera, List<ServizioPrenotato> servizi, ClienteDettagli cliente) {
+  public Prenotazione creaPrenotazione(Date dataCheckIn, Date dataCheckOut, int numeroOspiti, Camera camera, Set<ServizioPrenotato> servizi, ClienteDettagli cliente) {
     if (dataCheckIn == null || dataCheckIn.before(new Date())) {
-      throw new IllegalArgumentException("La data di ceck-in non può essere nulla o precedente alla data attuale");
+      throw new IllegalArgumentException("La data di check-in non può essere nulla o precedente alla data attuale");
     }
     if (dataCheckOut == null || dataCheckOut.before(new Date())) {
-      throw new IllegalArgumentException("La data di ceck-out non può essere nulla o precedente alla data attuale");
+      throw new IllegalArgumentException("La data di check-out non può essere nulla o precedente alla data attuale");
     }
     if (dataCheckOut.before(dataCheckIn)) {
-      throw new IllegalArgumentException("La data di ceck-out non può essere precedente alla data di check-in");
+      throw new IllegalArgumentException("La data di check-out non può essere precedente alla data di check-in");
     }
     if (numeroOspiti <= 0) {
       throw new IllegalArgumentException("Il numero di ospiti deve essere maggiore di 0");
     }
     if (camera == null) {
-      throw new IllegalArgumentException("La camera non può essere nulla");
+      throw new IllegalArgumentException("La camera non è selezionata");
     }
     if (servizi == null) {
       throw new IllegalArgumentException("I servizi non possono essere nulli");
     }
     if (cliente == null) {
-      throw new IllegalArgumentException("Il cliente non può essere nullo");
+      throw new IllegalArgumentException("Il cliente deve essere autenticato");
     }
     if (numeroOspiti > camera.getNumeroMaxOspiti()) {
       throw new IllegalArgumentException(
@@ -68,7 +73,7 @@ public class GestionePrenotazioniImpl implements GestionePrenotazioniService {
     }
     synchronized (this) {
       if (!gestioneCamereService.verificaDisponibilita(camera, dataCheckIn, dataCheckOut)) {
-        throw new IllegalArgumentException("La camera non è disponibile per le date selezionate"
+        throw new IllegalArgumentException("La camera non è più disponibile per le date selezionate"
         );
       }
       for (ServizioPrenotato servizio : servizi) {
@@ -89,6 +94,10 @@ public class GestionePrenotazioniImpl implements GestionePrenotazioniService {
       cliente.creaPrenotazione(prenotazione);
 
       clienteDettagliRepository.save(cliente);
+
+      camera.addPrenotazione(prenotazione);
+
+      cameraRepository.save(camera);
 
       return prenotazione;
     }

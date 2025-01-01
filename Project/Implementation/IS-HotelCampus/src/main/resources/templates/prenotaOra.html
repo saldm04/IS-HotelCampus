@@ -38,11 +38,16 @@
         <img th:src="@{'/' + ${camera.getImmagine()}}" alt="Immagine camera">
     </div>
     <div class="info">
+        <h1>Numero camera:</h1><span th:text="${camera.getNumero()}"></span>
         <h1>Tipologia camera:</h1><span th:text="${camera.getTipo()}"></span>
         <h1>Numero massimo di ospiti:</h1><span th:text="${camera.getNumeroMaxOspiti()}"></span>
         <h1>Costo per notte:</h1><span th:text="${camera.getCosto()}"></span>
-        <form method="post" th:action="@{/prenotazione/finalizza}" id="addCartForm" th:if="${ricercaEffettuata}">
+        <form method="post" th:action="@{/prenotazioni/selezionaServizi}" id="addCartForm" th:if="${ricercaEffettuata}">
             <input type="hidden" name="numeroCamera" th:value="${camera.getId()}"/>
+            <input type="hidden" name="importoCamera" th:value="${camera.getCosto()}"/>
+            <input type="hidden" name="numeroOspiti" th:value="${numeroOspiti}"/>
+            <input type="hidden" name="checkIn" th:value="${checkIn}"/>
+            <input type="hidden" name="checkOut" th:value="${checkOut}"/>
             <input type="submit" value="Prenota ora"/>
         </form>
     </div>

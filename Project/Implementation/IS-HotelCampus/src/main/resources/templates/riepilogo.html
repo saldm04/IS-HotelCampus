@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="Fragments/general :: head"></div>
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/riepilogo.css}"/>
+</head>
+
+<body>
+<nav th:replace="Fragments/general :: navbar"></nav>
+
+<div class="container">
+
+    <!-- Aggiunto per spaziare il contenuto -->
+    <br><br><br><br><br>
+
+    <h1>Riepilogo Prenotazione</h1>
+
+    <h2>Informazioni Soggiorno</h2>
+    <div class="soggiorno-info">
+        <p><strong>Data check-in</strong> <span th:text="${checkIn}"></span></p>
+        <p><strong>Data check-out</strong> <span th:text="${checkOut}"></span></p>
+    </div>
+
+    <h2>Informazioni Camera</h2>
+    <div class="camera-info">
+        <p><strong>Numero Camera:</strong> <span th:text="${camera.numero}"></span></p>
+        <p><strong>Tipo:</strong> <span th:text="${camera.tipo}"></span></p>
+        <p><strong>Numero ospiti:</strong> <span th:text="${numeroOspiti}"></span></p>
+        <p><strong>Quadratura:</strong> <span th:text="${camera.quadratura}"></span> mq</p>
+        <p><strong>Costo Camera:</strong> <span th:text="${totaleCamera}"></span> €</p>
+    </div>
+
+    <h2>Servizi Selezionati</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nome Servizio</th>
+            <th>Costo Unitario</th>
+            <th>Quantità</th>
+            <th>Subtotale</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="servizioEntry : ${serviziSelezionati}">
+            <td th:text="${servizioEntry.key.nome}"></td>
+            <td th:text="${servizioEntry.key.costo}"></td>
+            <td th:text="${servizioEntry.value}"></td>
+            <td th:text="${servizioEntry.key.costo * servizioEntry.value}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>Totale Camera: <span th:text="${totaleCamera}"></span> €</h3>
+    <h3>Totale Servizi: <span th:text="${totaleServizi}"></span> €</h3>
+    <h2>Totale Generale: <span th:text="${totale}"></span> €</h2>
+
+    <!-- Form per confermare la prenotazione -->
+    <form th:action="@{/prenotazioni/confermaPrenotazione}" method="post">
+        <!-- Passa nuovamente i dati necessari come hidden inputs -->
+        <input type="hidden" name="numeroCamera" th:value="${camera.id}" />
+        <input type="hidden" name="numeroOspiti" th:value="${numeroOspiti}" />
+        <input type="hidden" name="checkIn" th:value="${checkIn}" />
+        <input type="hidden" name="checkOut" th:value="${checkOut}" />
+
+        <!-- Passa le quantità dei servizi selezionati -->
+        <div th:each="servizioEntry : ${serviziSelezionati}">
+            <input type="hidden" th:name="'quantita[' + ${servizioEntry.key.id} + ']'" th:value="${servizioEntry.value}" />
+        </div>
+
+        <button type="submit">Conferma Prenotazione</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 package it.unisa.hotelcampus.gestioneservizi.controller;
 
-import it.unisa.hotelcampus.gestioneservizi.service.GestioneServiziServiceImpl;
+import it.unisa.hotelcampus.gestioneservizi.service.GestioneServiziService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/servizi")
 public class ServizioController {
 
-    private GestioneServiziServiceImpl gestioneServiziService;
+    private GestioneServiziService gestioneServiziService;
 
     @Autowired
-    public ServizioController(final GestioneServiziServiceImpl gestioneServiziService) {
+    public ServizioController(final GestioneServiziService gestioneServiziService) {
         this.gestioneServiziService = gestioneServiziService;
     }
 

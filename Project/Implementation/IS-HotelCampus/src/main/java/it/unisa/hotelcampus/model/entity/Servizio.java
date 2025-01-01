@@ -9,7 +9,7 @@ public class Servizio {
     private Long id;
     @Column(nullable = false)
     private String nome;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 600)
     private String descrizione;
     @Column(nullable = false)
     private int costo;

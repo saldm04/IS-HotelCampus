@@ -1,6 +1,8 @@
 package it.unisa.hotelcampus.gestioneutenti.services;
 
+import it.unisa.hotelcampus.model.dao.ClienteDettagliRepository;
 import it.unisa.hotelcampus.model.dao.UtenteRepository;
+import it.unisa.hotelcampus.model.entity.ClienteDettagli;
 import it.unisa.hotelcampus.model.entity.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +14,12 @@ import java.util.*;
 @Service
 public class GestioneUtentiServiceImpl implements GestioneUtentiService {
     private UtenteRepository utenteRepository;
+    private ClienteDettagliRepository clienteDettagliRepository;
 
     @Autowired
-    public GestioneUtentiServiceImpl(UtenteRepository utenteRepository) {
+    public GestioneUtentiServiceImpl(UtenteRepository utenteRepository, ClienteDettagliRepository clienteDettagliRepository) {
         this.utenteRepository = utenteRepository;
+        this.clienteDettagliRepository = clienteDettagliRepository;
     }
 
     @Override
@@ -53,6 +57,8 @@ public class GestioneUtentiServiceImpl implements GestioneUtentiService {
             throw new IllegalArgumentException("Esiste già un account associato a questa email!");
         }
         Utente utente = new Utente(email, toHash(password), nome, cognome, dataDiNascita, nazionalita);
+        ClienteDettagli clienteDettagli = new ClienteDettagli(utente);
+        utente.setClienteDettagli(clienteDettagli);
         utenteRepository.save(utente);
         return utente;
     }
@@ -94,6 +100,19 @@ public class GestioneUtentiServiceImpl implements GestioneUtentiService {
         if(ruoloUtente==null){
             throw new IllegalArgumentException("Ruolo non valido!");
         }
+        if(ruoloUtente==account.getRuolo()){
+            return;
+        }
+        if(ruoloUtente!=Utente.Ruolo.CLIENTE) {
+            account.setClienteDettagli(null);
+        }else{
+            if(clienteDettagliRepository.findById(account.getEmail()).isEmpty()){
+                account.setClienteDettagli(new ClienteDettagli(account));
+            }else {
+                account.setClienteDettagli(clienteDettagliRepository.findById(account.getEmail()).get());
+            }
+        }
+
         account.setRuolo(ruoloUtente);
         utenteRepository.save(account);
     }

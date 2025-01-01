@@ -15,10 +15,14 @@ public class ClienteDettagli {
     @JoinColumn(name = "email", nullable = false)
     private Utente utente;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Prenotazione> prenotazioni = new HashSet<>();
 
     public ClienteDettagli() {}
+
+    public ClienteDettagli(Utente utente) {
+        this.utente = utente;
+    }
 
     public String getEmail() {
         return email;

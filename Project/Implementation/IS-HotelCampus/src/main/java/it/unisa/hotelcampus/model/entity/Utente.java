@@ -16,13 +16,14 @@ public class Utente {
     @Column(nullable = false)
     private String cognome;
     @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date dataNascita;
     @Column(nullable = false)
     private String nazionalita;
     @Column(nullable = false)
     private Ruolo ruolo;
 
-    @OneToOne(mappedBy = "utente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "utente", cascade = CascadeType.ALL)
     private ClienteDettagli clienteDettagli;
 
     public Utente() {
@@ -92,6 +93,14 @@ public class Utente {
 
     public void setRuolo(Ruolo ruolo) {
         this.ruolo = ruolo;
+    }
+
+    public ClienteDettagli getClienteDettagli() {
+        return clienteDettagli;
+    }
+
+    public void setClienteDettagli(ClienteDettagli clienteDettagli) {
+        this.clienteDettagli = clienteDettagli;
     }
 
     @Override

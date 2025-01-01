@@ -13,7 +13,7 @@ public class ServizioPrenotato {
     private int numeroServizi;
 
     @ManyToOne
-    @JoinColumn(name = "servizio_id", nullable = false) // Foreign Key
+    @JoinColumn(name = "servizio_id", nullable = false)
     private Servizio servizio;
 
     public ServizioPrenotato() {
