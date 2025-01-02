@@ -42,14 +42,19 @@
         <h1>Tipologia camera:</h1><span th:text="${camera.getTipo()}"></span>
         <h1>Numero massimo di ospiti:</h1><span th:text="${camera.getNumeroMaxOspiti()}"></span>
         <h1>Costo per notte:</h1><span th:text="${camera.getCosto()}"></span>
-        <form method="post" th:action="@{/prenotazioni/selezionaServizi}" id="addCartForm" th:if="${ricercaEffettuata}">
-            <input type="hidden" name="numeroCamera" th:value="${camera.getId()}"/>
-            <input type="hidden" name="importoCamera" th:value="${camera.getCosto()}"/>
-            <input type="hidden" name="numeroOspiti" th:value="${numeroOspiti}"/>
-            <input type="hidden" name="checkIn" th:value="${checkIn}"/>
-            <input type="hidden" name="checkOut" th:value="${checkOut}"/>
-            <input type="submit" value="Prenota ora"/>
-        </form>
+
+        <!-- Se ricerca effettuata e utente loggato -->
+        <button type="button" class="prenotaOra"
+                th:if="${ricercaEffettuata} and ${utente != null}"
+                th:onclick="mostraModale([[${camera.getId()}]], [[${camera.getNumero()}]], [[${camera.getCosto()}]])">
+            Prenota ora
+        </button>
+
+        <!-- Se ricerca effettuata ma utente non loggato -->
+        <button type="button" class="prenotaOra" onclick="location.href='/utenti/login'"
+                th:if="${ricercaEffettuata} and ${utente == null}">
+            Prenota ora
+        </button>
     </div>
 </div>
 
@@ -57,6 +62,41 @@
     <h1 class="avvisoCamere">La vostra ricerca non ha prodotto risultati.</h1>
     <h1 class="avvisoCamere">Non sono disponibili camere che soddisfano i vostri criteri di ricerca.</h1>
 </div>
+
+
+<div id="modale">
+    <div class="contenutoModale">
+        <span class="close" onclick="chiudiModale()">&times;</span>
+        <form th:action="@{/prenotazioni/riepilogo}" method="post">
+            <span id="cameraSelezionata">Camera selezionata numero: costo:</span>
+            <input type="hidden" id="modalIdCamera" th:name="cameraId"/>
+            <input type="hidden" id="modalNumeroOspiti" th:name="numeroOspiti"/>
+            <input type="hidden" id="modalNumeroCamera" th:name="numeroCamera"/>
+            <input type="hidden" id="modalImportoCamera" th:name="importoCamera"/>
+            <input type="hidden" id="modalCheckIn" th:name="checkIn"/>
+            <input type="hidden" id="modalCheckOut" th:name="checkOut"/>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nome Servizio</th>
+                    <th>Costo a Persona</th>
+                    <th>Quantità</th>
+                </tr>
+                </thead>
+                <tbody id="serviceModalTbody">
+                <!-- Righe dinamiche -->
+                </tbody>
+            </table>
+
+            <div class="totale-container">
+                <h3>Totale: <span id="modalTotale">0.00</span> €</h3>
+            </div>
+
+            <button type="submit">Mostra Riepilogo</button>
+        </form>
+    </div>
+</div>
+
 
 <script th:src="@{/Scripts/prenotaOra.js}"></script>
 </body>

@@ -1,13 +1,14 @@
 package it.unisa.hotelcampus.gestioneservizi.controller;
 
 import it.unisa.hotelcampus.gestioneservizi.service.GestioneServiziService;
+import it.unisa.hotelcampus.model.entity.Servizio;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.Collection;
+
+@RestController
 @RequestMapping("/servizi")
 public class ServizioController {
 
@@ -22,5 +23,11 @@ public class ServizioController {
     public String getServizi(Model model) {
         model.addAttribute("servizi", gestioneServiziService.getServizi());
         return "servizi";
+    }
+
+    @PostMapping
+    @ResponseBody
+    public Collection<Servizio> getServiziJson() {
+        return gestioneServiziService.getServizi();
     }
 }

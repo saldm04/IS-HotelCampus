@@ -33,7 +33,7 @@ public class Prenotazione {
     private int costoUnitarioCamera;
 
     @ManyToOne
-    @JoinColumn(name = "camera_id", nullable = false)
+    @JoinColumn(nullable = false)
     private Camera camera;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

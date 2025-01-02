@@ -4,6 +4,7 @@ import it.unisa.hotelcampus.model.dao.ClienteDettagliRepository;
 import it.unisa.hotelcampus.model.dao.UtenteRepository;
 import it.unisa.hotelcampus.model.entity.ClienteDettagli;
 import it.unisa.hotelcampus.model.entity.Utente;
+import it.unisa.hotelcampus.utils.acl.ControllaACL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +65,7 @@ public class GestioneUtentiServiceImpl implements GestioneUtentiService {
     }
 
     @Override
+    @ControllaACL
     public boolean elimina(Utente account) {
         if(account==null || this.getUtente(account.getEmail())!=account){
             throw new IllegalArgumentException("Account non trovato!");
@@ -82,16 +84,19 @@ public class GestioneUtentiServiceImpl implements GestioneUtentiService {
     }
 
     @Override
+    @ControllaACL
     public Collection<Utente> getUtenti() {
         return utenteRepository.findAll();
     }
 
     @Override
+    @ControllaACL
     public Collection<Utente> getClienti() {
         return utenteRepository.findAllByRuolo(Utente.Ruolo.CLIENTE);
     }
 
     @Override
+    @ControllaACL
     public void setRuolo(Utente account, String ruolo) {
         if(account==null || ruolo==null || ruolo.trim().isEmpty()){
             throw new IllegalArgumentException("I campi non possono essere vuoti!");

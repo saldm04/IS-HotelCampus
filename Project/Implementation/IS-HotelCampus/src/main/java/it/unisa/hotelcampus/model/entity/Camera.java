@@ -35,7 +35,7 @@ public class Camera {
     @Column(nullable = false)
     private boolean isDeleted;
 
-    @OneToMany
+    @OneToMany(mappedBy = "camera", cascade = CascadeType.ALL)
     private Set<Prenotazione> prenotazioni;
 
     public enum TipoCamera {

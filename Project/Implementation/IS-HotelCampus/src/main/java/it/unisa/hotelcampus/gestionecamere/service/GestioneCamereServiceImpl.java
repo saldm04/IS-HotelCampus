@@ -3,6 +3,7 @@ package it.unisa.hotelcampus.gestionecamere.service;
 import it.unisa.hotelcampus.model.dao.CameraRepository;
 import it.unisa.hotelcampus.model.dao.PrenotazioneRepository;
 import it.unisa.hotelcampus.model.entity.Camera;
+import it.unisa.hotelcampus.utils.acl.ControllaACL;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -26,11 +27,13 @@ public class GestioneCamereServiceImpl implements GestioneCamereService {
     }
 
     @Override
+    @ControllaACL
     public Camera creaCamera(int numero, Camera.TipoCamera tipo, int numeroMaxOspiti, int quadratura, int costo, String immagine) {
         return null;
     }
 
     @Override
+    @ControllaACL
     public boolean rimuoviCamera(Camera camera) {
         return false;
     }
@@ -53,6 +56,7 @@ public class GestioneCamereServiceImpl implements GestioneCamereService {
     }
 
     @Override
+    @ControllaACL
     public boolean verificaDisponibilita(Camera camera, Date checkIn, Date checkOut) {
         return !prenotazioneRepository.existsPrenotazione(
                 camera.getId(),

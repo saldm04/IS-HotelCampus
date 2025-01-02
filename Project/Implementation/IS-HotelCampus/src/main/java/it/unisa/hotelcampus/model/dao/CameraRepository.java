@@ -25,7 +25,7 @@ public interface CameraRepository extends JpaRepository<Camera, Long> {
               SELECT p.camera.id 
               FROM Prenotazione p 
               WHERE p.dataCheckIn < :dataCheckOut 
-                AND p.dataCheckOut > :dataCheckIn
+                AND p.dataCheckOut >= :dataCheckIn
           )
     """)
     Collection<Camera> findCamereDisponibili(

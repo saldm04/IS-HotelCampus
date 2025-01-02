@@ -6,6 +6,7 @@ import it.unisa.hotelcampus.model.dao.CameraRepository;
 import it.unisa.hotelcampus.model.dao.ServizioPrenotatoRepository;
 import it.unisa.hotelcampus.model.dao.ServizioRepository;
 import it.unisa.hotelcampus.model.entity.*;
+import it.unisa.hotelcampus.utils.acl.ControllaACL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,50 +22,27 @@ import java.util.*;
 @RequestMapping("/prenotazioni")
 public class PrenotazioniController {
     private final GestionePrenotazioniService gestionePrenotazioniService;
-    private final GestioneServiziService gestioneServiziService;
     private final CameraRepository cameraRepository;
     private final ServizioRepository servizioRepository;
-    private final ServizioPrenotatoRepository servizioPrenotatoRepository;
 
     @Autowired
-    public PrenotazioniController(GestionePrenotazioniService gestionePrenotazioniService, GestioneServiziService gestioneServiziService, CameraRepository cameraRepository, ServizioRepository servizioRepository, ServizioPrenotatoRepository servizioPrenotatoRepository) {
+    public PrenotazioniController(GestionePrenotazioniService gestionePrenotazioniService, CameraRepository cameraRepository, ServizioRepository servizioRepository) {
         this.gestionePrenotazioniService = gestionePrenotazioniService;
-        this.gestioneServiziService = gestioneServiziService;
         this.cameraRepository = cameraRepository;
         this.servizioRepository = servizioRepository;
-        this.servizioPrenotatoRepository = servizioPrenotatoRepository;
-    }
-
-    @PostMapping("/selezionaServizi")
-    public String selezionaServizi(
-            Model model,
-            @RequestParam("numeroCamera") String numeroCamera,
-            @RequestParam("importoCamera") String importoCamera,
-            @RequestParam("numeroOspiti") String numeroOspiti,
-            @RequestParam("checkIn") String checkIn,
-            @RequestParam("checkOut") String checkOut
-    ) {
-        model.addAttribute("servizi", gestioneServiziService.getServizi());
-        model.addAttribute("importoCamera", importoCamera);
-        model.addAttribute("numeroCamera", numeroCamera);
-        model.addAttribute("numeroOspiti", numeroOspiti);
-        model.addAttribute("checkIn", checkIn);
-        model.addAttribute("checkOut", checkOut);
-        return "selezionaServizi";
     }
 
     @PostMapping("/riepilogo")
     public String riepilogo(
             Model model,
-            @RequestParam("numeroCamera") Long numeroCamera,
-            @RequestParam("importoCamera") Double importoCamera,
+            @RequestParam("cameraId") Long id,
             @RequestParam("numeroOspiti") Integer numeroOspiti,
             @RequestParam Map<String, String> quantita, // Mappa delle quantità con chiavi come "quantita[servizioId]"
             @RequestParam("checkIn") String checkIn,
             @RequestParam("checkOut") String checkOut
     ) {
         // Recupera la Camera dal database
-        Camera camera = cameraRepository.findById(numeroCamera).orElse(null);
+        Camera camera = cameraRepository.findById(id).orElse(null);
 
         // Processa le quantità dei servizi
         Map<Servizio, Integer> serviziSelezionati = new HashMap<>();
@@ -88,12 +66,12 @@ public class PrenotazioniController {
                         }
                     }
                 } catch (NumberFormatException e) {
-                    return "redirect:/error";
+                    return "error";
                 }
             }
         }
 
-        double totaleCamera = importoCamera;
+        double totaleCamera = camera.getCosto();
         double totale = totaleCamera + totaleServizi;
 
         // Aggiungi i dati al modello
@@ -148,7 +126,7 @@ public class PrenotazioniController {
                         }
                     }
                 } catch (NumberFormatException e) {
-                    return "redirect:/error";
+                    return "error";
                 }
             }
         }
@@ -156,11 +134,11 @@ public class PrenotazioniController {
         try {
             Prenotazione prenotazione = gestionePrenotazioniService.creaPrenotazione(dataCheckIn, dataCheckOut, numeroOspiti, camera, serviziPrenotati, utente.getClienteDettagli());
             model.addAttribute("prenotazione", prenotazione);
-        }catch (IllegalArgumentException e){
-            model.addAttribute("errore", e.getMessage());
-            return "redirect:/error";
+        }catch (Exception e){
+            model.addAttribute("generalError", e.getMessage());
+            return "error";
         }
-
+        System.out.println("\n\n\n sono qui2 \n\n\n");
         return "confermaPrenotazione";
     }
 }

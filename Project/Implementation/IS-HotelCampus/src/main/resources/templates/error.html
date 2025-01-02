@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="Fragments/general :: head"></div>
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/errorPage.css}"/>
+</head>
+
+<body>
+<nav th:replace="Fragments/general :: navbar"></nav>
+
+<div class="error-container">
+    <div class="error-code" th:text="'Ops qualcosa è andato storto:Errore ' + ${generalError}" th:if="${generalError != null}">
+    <div class="error-code" th:text="'Ops qualcosa è andato storto: Errore interno, riprovare" th:unless="${generalError != null or error != null}">
+    </div>
+    <div class="error-message">
+        Se l'errore persiste, contattare l'admin tramite l'email <a href="mailto:hotelcampus@admin.com">hotelcampus@admin.com</a>.
+    </div>
+</div>
+</body>

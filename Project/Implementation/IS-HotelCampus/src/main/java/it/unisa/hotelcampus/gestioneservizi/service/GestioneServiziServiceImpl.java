@@ -2,6 +2,7 @@ package it.unisa.hotelcampus.gestioneservizi.service;
 
 import it.unisa.hotelcampus.model.dao.ServizioRepository;
 import it.unisa.hotelcampus.model.entity.Servizio;
+import it.unisa.hotelcampus.utils.acl.ControllaACL;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -21,11 +22,13 @@ public class GestioneServiziServiceImpl implements GestioneServiziService{
     }
 
     @Override
+    @ControllaACL
     public Servizio creaServizio(String nome, String descrizione, int costo, String immagine) {
         return null;
     }
 
     @Override
+    @ControllaACL
     public boolean rimuoviServizio(Servizio servizio) {
         return false;
     }

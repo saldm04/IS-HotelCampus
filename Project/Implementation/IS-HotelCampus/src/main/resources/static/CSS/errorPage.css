@@ -1,0 +1,19 @@
+.error-container {
+    text-align: center;
+    width: 100vw;
+    height:100vh;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.error-code {
+    width: 90%;
+    font-size: clamp(15px, 3vw, 200px);
+    color: red;
+}
+.error-message {
+    width: 90%;
+    font-size: clamp(14px, 2.5vw, 200px);
+    margin-top: 20px;
+}

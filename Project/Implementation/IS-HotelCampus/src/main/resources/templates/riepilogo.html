@@ -58,7 +58,7 @@
 
     <!-- Form per confermare la prenotazione -->
     <form th:action="@{/prenotazioni/confermaPrenotazione}" method="post">
-        <!-- Passa nuovamente i dati necessari come hidden inputs -->
+
         <input type="hidden" name="numeroCamera" th:value="${camera.id}" />
         <input type="hidden" name="numeroOspiti" th:value="${numeroOspiti}" />
         <input type="hidden" name="checkIn" th:value="${checkIn}" />
