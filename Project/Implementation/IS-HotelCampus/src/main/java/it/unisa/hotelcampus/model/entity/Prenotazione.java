@@ -36,7 +36,7 @@ public class Prenotazione {
     @JoinColumn(nullable = false)
     private Camera camera;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "prenotazione", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ServizioPrenotato> serviziPrenotati;
 
     @ManyToOne

@@ -11,22 +11,19 @@ import it.unisa.hotelcampus.model.entity.ServizioPrenotato;
 import it.unisa.hotelcampus.utils.acl.ControllaACL;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.*;
 
 @Service
-public class GestionePrenotazioniServiceImpl implements GestionePrenotazioniService {
-
+public class GestionePrenotazioniServImp implements GestionePrenotazioniService {
 
   private PrenotazioneRepository prenotazioneRepository;
   private GestioneCamereServiceImpl gestioneCamereService;
   private ClienteDettagliRepository clienteDettagliRepository;
 
 
-  public GestionePrenotazioniServiceImpl(final GestioneCamereServiceImpl gestioneCamereService,
-                                         final PrenotazioneRepository prenotazioneRepository,
-                                         final ClienteDettagliRepository clienteDettagliRepository
+  public GestionePrenotazioniServImp(final GestioneCamereServiceImpl gestioneCamereService,
+                                     final PrenotazioneRepository prenotazioneRepository,
+                                     final ClienteDettagliRepository clienteDettagliRepository
                                   ) {
 
     this.gestioneCamereService = gestioneCamereService;
@@ -99,6 +96,10 @@ public class GestionePrenotazioniServiceImpl implements GestionePrenotazioniServ
               new Date(), dataCheckIn, dataCheckOut,
               numeroOspiti, camera, servizi, cliente
       );
+
+      for (ServizioPrenotato servizio : servizi) {
+        servizio.setPrenotazione(prenotazione);
+      }
 
       prenotazioneRepository.save(prenotazione);
 

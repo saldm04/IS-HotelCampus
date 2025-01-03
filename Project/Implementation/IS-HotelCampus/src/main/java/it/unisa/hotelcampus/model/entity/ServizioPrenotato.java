@@ -16,6 +16,10 @@ public class ServizioPrenotato {
     @JoinColumn(name = "servizio_id", nullable = false)
     private Servizio servizio;
 
+    @ManyToOne
+    @JoinColumn(name = "prenotazione_id", nullable = false)
+    private Prenotazione prenotazione;
+
     public ServizioPrenotato() {
     }
 
@@ -55,6 +59,14 @@ public class ServizioPrenotato {
 
     public void setServizio(Servizio servizio) {
         this.servizio = servizio;
+    }
+
+    public Prenotazione getPrenotazione() {
+        return prenotazione;
+    }
+
+    public void setPrenotazione(Prenotazione prenotazione) {
+        this.prenotazione = prenotazione;
     }
 
     @Override

@@ -97,6 +97,8 @@ public class PrenotazioniController {
             @SessionAttribute("utente") Utente utente,
             Model model
     ){
+        System.out.println("\n\n\nParametri ricevuti: " + quantita +"\n\n\n");
+
         Camera camera = cameraRepository.findById(numeroCamera).orElse(null);
         Date dataCheckIn = Date.valueOf(checkIn);
         Date dataCheckOut = Date.valueOf(checkOut);
@@ -138,7 +140,7 @@ public class PrenotazioniController {
             model.addAttribute("generalError", e.getMessage());
             return "error";
         }
-        System.out.println("\n\n\n sono qui2 \n\n\n");
+
         return "confermaPrenotazione";
     }
 }
