@@ -14,19 +14,10 @@ import java.util.Set;
 @RequestMapping("/utenti")
 public class RuoloAndEliminazioneController {
     private GestioneUtentiService gestioneUtentiService;
-    private static final Map<String, Set<Utente.Ruolo>> ACL_MAP = new HashMap<>();
 
     @Autowired
     public RuoloAndEliminazioneController(GestioneUtentiService gestioneUtentiService) {
         this.gestioneUtentiService = gestioneUtentiService;
-    }
-
-    static {
-        ACL_MAP.put("elimina", Set.of(Utente.Ruolo.DIRETTORE));
-        ACL_MAP.put("setRuolo", Set.of(Utente.Ruolo.DIRETTORE));
-        ACL_MAP.put("getUtenti", Set.of(Utente.Ruolo.DIRETTORE));
-        ACL_MAP.put("getUtente", Set.of(Utente.Ruolo.DIRETTORE));
-        ACL_MAP.put("getClienti", Set.of(Utente.Ruolo.GESTOREPRENOTAZIONI));
     }
 
     //elimina

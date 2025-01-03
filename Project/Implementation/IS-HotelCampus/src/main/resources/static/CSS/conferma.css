@@ -1,0 +1,47 @@
+/* Stile generale per il contenitore */
+.container {
+    top: -10vh;
+    width: 95%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 80px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Stile specifico per la pagina di conferma */
+.conferma-container {
+    text-align: center;
+}
+
+.conferma-titolo {
+    color: #50731d;
+    font-size: clamp(24px, 3vw, 36px);
+    margin-bottom: 15px;
+}
+
+.conferma-testo {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.conferma-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.conferma-btn:hover {
+    background-color: #0056b3;
+}
+
+.btn-container{
+    margin-top: 30px;
+}

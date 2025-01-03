@@ -46,7 +46,7 @@ public class PrenotazioniController {
 
         // Processa le quantità dei servizi
         Map<Servizio, Integer> serviziSelezionati = new HashMap<>();
-        double totaleServizi = 0.0;
+        int totaleServizi = 0;
 
         for (Map.Entry<String, String> entry : quantita.entrySet()) {
             // Estrarre l'ID del servizio dalla chiave, che è nel formato "quantita[servizioId]"
@@ -71,8 +71,8 @@ public class PrenotazioniController {
             }
         }
 
-        double totaleCamera = camera.getCosto();
-        double totale = totaleCamera + totaleServizi;
+        int totaleCamera = camera.getCosto();
+        int totale = totaleCamera + totaleServizi;
 
         // Aggiungi i dati al modello
         model.addAttribute("camera", camera);
