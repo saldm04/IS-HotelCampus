@@ -12,36 +12,55 @@ import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.util.*;
 
+/**
+ * Implementazione del servizio {@link GestioneUtentiService}.
+ * Gestisce l'autenticazione, la creazione, l'eliminazione e la gestione dei ruoli degli utenti nel sistema HotelCampus.
+ * Utilizza i repository {@link UtenteRepository} e {@link ClienteDettagliRepository} per l'accesso ai dati.
+ *
+ * @version 1.0
+ */
 @Service
 public class GestioneUtentiServiceImpl implements GestioneUtentiService {
     private UtenteRepository utenteRepository;
     private ClienteDettagliRepository clienteDettagliRepository;
 
+    /**
+     * Costruttore per l'iniezione delle dipendenze.
+     *
+     * @param utenteRepository         il repository per l'entità {@link Utente}
+     * @param clienteDettagliRepository il repository per l'entità {@link ClienteDettagli}
+     */
     @Autowired
     public GestioneUtentiServiceImpl(UtenteRepository utenteRepository, ClienteDettagliRepository clienteDettagliRepository) {
         this.utenteRepository = utenteRepository;
         this.clienteDettagliRepository = clienteDettagliRepository;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Utente autentica(String email, String password) {
-        if(email==null || email.trim().isEmpty() || password==null || password.trim().isEmpty()){
+        if(email == null || email.trim().isEmpty() || password == null || password.trim().isEmpty()){
             throw new IllegalArgumentException("I campi email e password non possono essere vuoti!");
         }
         Utente utente = this.getUtente(email);
-        if (utente==null) {
+        if (utente == null) {
             throw new IllegalArgumentException("L'email inserita non è associata ad alcun account!");
         }
         if(!utente.getPassword().equals(toHash(password))){
             throw new IllegalArgumentException("Credenziali errate!");
-        }else {
+        } else {
             return utente;
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Utente creaUtente(String nome, String cognome, Date dataDiNascita, String nazionalita, String email, String password) {
-        if(nome==null ||  cognome==null || dataDiNascita==null || nazionalita==null  || email==null ||  password==null){
+        if(nome == null ||  cognome == null || dataDiNascita == null || nazionalita == null  || email == null ||  password == null){
             throw new IllegalArgumentException("I campi non possono essere vuoti!");
         }
         nome = nome.trim();
@@ -50,11 +69,11 @@ public class GestioneUtentiServiceImpl implements GestioneUtentiService {
         email = email.trim();
         password = password.trim();
 
-        if(nome.isEmpty() || cognome.isEmpty() || nazionalita.isEmpty() || email.isEmpty() || password.length()<8 || dataDiNascita.after(new Date(System.currentTimeMillis()))){
+        if(nome.isEmpty() || cognome.isEmpty() || nazionalita.isEmpty() || email.isEmpty() || password.length() < 8 || dataDiNascita.after(new Date(System.currentTimeMillis()))){
             throw new IllegalArgumentException("I campi non possono essere vuoti!");
         }
 
-        if(this.getUtente(email)!=null){
+        if(this.getUtente(email) != null){
             throw new IllegalArgumentException("Esiste già un account associato a questa email!");
         }
         Utente utente = new Utente(email, toHash(password), nome, cognome, dataDiNascita, nazionalita);
@@ -64,56 +83,73 @@ public class GestioneUtentiServiceImpl implements GestioneUtentiService {
         return utente;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @ControllaACL
     public boolean elimina(Utente account) {
-        if(account==null || this.getUtente(account.getEmail())!=account){
+        if(account == null || this.getUtente(account.getEmail()) != account){
             throw new IllegalArgumentException("Account non trovato!");
         }
         utenteRepository.delete(account);
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Utente getUtente(String email) {
-        if(email==null || email.trim().isEmpty()){
+        if(email == null || email.trim().isEmpty()){
             throw new IllegalArgumentException("Il campo email non può essere vuoto!");
         }
         Utente utente = utenteRepository.findById(email).orElse(null);
         return utente;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @ControllaACL
     public Collection<Utente> getUtenti() {
         return utenteRepository.findAll();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @ControllaACL
     public Collection<Utente> getClienti() {
         return utenteRepository.findAllByRuolo(Utente.Ruolo.CLIENTE);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @ControllaACL
     public void setRuolo(Utente account, String ruolo) {
-        if(account==null || ruolo==null || ruolo.trim().isEmpty()){
+        if(account == null || ruolo == null || ruolo.trim().isEmpty()){
             throw new IllegalArgumentException("I campi non possono essere vuoti!");
         }
-        Utente.Ruolo ruoloUtente = Utente.Ruolo.valueOf(ruolo);
-        if(ruoloUtente==null){
+        Utente.Ruolo ruoloUtente;
+        try {
+            ruoloUtente = Utente.Ruolo.valueOf(ruolo);
+        } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Ruolo non valido!");
         }
-        if(ruoloUtente==account.getRuolo()){
+        if(ruoloUtente == account.getRuolo()){
             return;
         }
-        if(ruoloUtente!=Utente.Ruolo.CLIENTE) {
+        if(ruoloUtente != Utente.Ruolo.CLIENTE) {
             account.setClienteDettagli(null);
-        }else{
+        } else {
             if(clienteDettagliRepository.findById(account.getEmail()).isEmpty()){
                 account.setClienteDettagli(new ClienteDettagli(account));
-            }else {
+            } else {
                 account.setClienteDettagli(clienteDettagliRepository.findById(account.getEmail()).get());
             }
         }
@@ -122,19 +158,24 @@ public class GestioneUtentiServiceImpl implements GestioneUtentiService {
         utenteRepository.save(account);
     }
 
+    /**
+     * Genera l'hash della password utilizzando l'algoritmo SHA-512.
+     *
+     * @param password la password in chiaro da hashare
+     * @return la stringa hashata della password, oppure {@code null} se si verifica un errore
+     */
     private static String toHash(String password) {
         String hashString = null;
 
         try {
-
             java.security.MessageDigest digest = java.security.MessageDigest.getInstance("SHA-512");
             byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 
-            hashString = "";
-
-            for (int i = 0; i < hash.length; i++) {
-                hashString += Integer.toHexString((hash[i] & 0xFF) | 0x100).substring(1, 3);
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hash) {
+                sb.append(String.format("%02x", b));
             }
+            hashString = sb.toString();
 
         } catch (java.security.NoSuchAlgorithmException e) {
             System.out.println(e);

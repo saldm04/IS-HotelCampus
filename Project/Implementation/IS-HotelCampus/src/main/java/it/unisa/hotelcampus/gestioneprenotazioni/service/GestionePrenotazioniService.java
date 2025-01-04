@@ -13,6 +13,8 @@ import java.util.Set;
  * L'interfaccia GestionePrenotazioniService fornisce metodi per la
  * gestione delle prenotazioni nel sistema di prenotazione.
  * Include funzionalità per creare, eliminare e cercare prenotazioni.
+ *
+ * @version 1.0
  */
 public interface GestionePrenotazioniService {
 
@@ -20,7 +22,7 @@ public interface GestionePrenotazioniService {
      * Restituisce tutte le prenotazioni effettuate e
      * registrate nel sistema.
      *
-     * @return una collezione di oggetti Prenotazione
+     * @return una collezione di oggetti {@link Prenotazione}
      */
     Collection<Prenotazione> getPrenotazioni();
 
@@ -33,7 +35,7 @@ public interface GestionePrenotazioniService {
      * @param camera           la camera da prenotare
      * @param servizi          l'insieme dei servizi prenotati
      * @param cliente          l'istanza del cliente che effettua la prenotazione
-     * @return l'oggetto Prenotazione appena creata
+     * @return l'oggetto {@link Prenotazione} appena creata
      * @throws IllegalArgumentException se uno dei parametri è invalido
      */
     Prenotazione creaPrenotazione(Date dataCheckIn, Date dataCheckOut,
@@ -61,7 +63,7 @@ public interface GestionePrenotazioniService {
      * @param checkIn  la data di check-in desiderata
      * @param checkOut la data di check-out desiderata
      *
-     * @return una collezione di oggetti Prenotazione che rispettano i parametri specificati
+     * @return una collezione di oggetti {@link Prenotazione} che rispettano i parametri specificati
      *
      * @throws IllegalArgumentException se uno dei parametri è invalido
      */

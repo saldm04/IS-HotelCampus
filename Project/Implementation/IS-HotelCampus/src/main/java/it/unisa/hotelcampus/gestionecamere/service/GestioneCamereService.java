@@ -11,6 +11,8 @@ import java.util.Date;
  * gestione delle camere nel sistema di prenotazione.
  * Include funzionalità per inserire, rimuovere e verificare
  * la disponibilità delle camere.
+ *
+ * @version 1.0
  */
 public interface GestioneCamereService {
 
@@ -18,7 +20,7 @@ public interface GestioneCamereService {
      * Restituisce tutte le camere registrate nel sistema
      * e non eliminate logicamente.
      *
-     * @return una collezione di oggetti Camera non eliminate.
+     * @return una collezione di oggetti {@link Camera} non eliminate.
      */
     Collection<Camera> getCamere();
 
@@ -35,7 +37,7 @@ public interface GestioneCamereService {
      * @param costo           il costo della camera
      * @param immagine        il percorso o identificativo dell'immagine
      *                        della camera
-     * @return l'oggetto Camera appena creata
+     * @return l'oggetto {@link Camera} appena creata
      * @throws IllegalArgumentException se uno dei parametri è invalido
      */
     Camera creaCamera(

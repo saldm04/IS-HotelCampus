@@ -14,11 +14,15 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 /**
- * Implementazione del servizio di gestione delle prenotazioni.
+ * Implementazione del servizio {@link GestionePrenotazioniService}.
  * Fornisce metodi per creare, eliminare, recuperare e cercare prenotazioni.
+ * Utilizza i repository {@link PrenotazioneRepository} e {@link ClienteDettagliRepository} per l'accesso ai dati.
+ *
+ * @version 1.0
  */
 @Service
 public class GestionePrenotazioniServImp implements GestionePrenotazioniService {
+
 
   private PrenotazioneRepository prenotazioneRepository;
   private GestioneCamereServiceImpl gestioneCamereService;
@@ -29,8 +33,8 @@ public class GestionePrenotazioniServImp implements GestionePrenotazioniService 
    * Costruttore della classe GestionePrenotazioniServiceImpl.
    *
    * @param gestioneCamereService      il servizio di gestione delle camere
-   * @param prenotazioneRepository     il repository per la gestione delle prenotazioni
-   * @param clienteDettagliRepository  il repository per la gestione dei dettagli dei clienti
+   * @param prenotazioneRepository     il repository per l'entità {@link Prenotazione}
+   * @param clienteDettagliRepository  il repository per l'entità {@link ClienteDettagli}
    */
   public GestionePrenotazioniServImp(final GestioneCamereServiceImpl gestioneCamereService,
                                      final PrenotazioneRepository prenotazioneRepository,

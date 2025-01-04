@@ -7,15 +7,30 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
+/**
+ * Implementazione del servizio {@link GestioneServiziService}.
+ * Gestisce le operazioni relative ai servizi offerti dall'hotel, come il recupero dei servizi disponibili.
+ * Utilizza il repository {@link ServizioRepository} per l'accesso ai dati.
+ *
+ * @version 1.0
+ */
 @Service
 public class GestioneServiziServiceImpl implements GestioneServiziService{
 
-    ServizioRepository servizioRepository;
+    private final ServizioRepository servizioRepository;
 
-    public GestioneServiziServiceImpl(final ServizioRepository  servizioRepository) {
+    /**
+     * Costruttore per l'iniezione delle dipendenze.
+     *
+     * @param servizioRepository il repository per l'entità {@link Servizio}
+     */
+    public GestioneServiziServiceImpl(final ServizioRepository servizioRepository) {
         this.servizioRepository = servizioRepository;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Collection<Servizio> getServizi() {
         return servizioRepository.findAllByisDeletedIsFalse();

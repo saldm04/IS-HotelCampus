@@ -4,14 +4,18 @@ import it.unisa.hotelcampus.model.dao.CameraRepository;
 import it.unisa.hotelcampus.model.dao.PrenotazioneRepository;
 import it.unisa.hotelcampus.model.entity.Camera;
 import it.unisa.hotelcampus.utils.acl.ControllaACL;
+import it.unisa.hotelcampus.model.entity.Prenotazione;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Date;
 
 /**
- * Implementazione del servizio di gestione delle camere.
+ * Implementazione del servizio {@link GestioneCamereService}.
  * Fornisce metodi per inserire, rimuovere e verificare la disponibilità delle camere.
+ * Utilizza i repository {@link CameraRepository} e {@link PrenotazioneRepository} per l'accesso ai dati.
+ *
+ * @version 1.0
  */
 @Service
 public class GestioneCamereServiceImpl implements GestioneCamereService {
@@ -22,8 +26,8 @@ public class GestioneCamereServiceImpl implements GestioneCamereService {
     /**
      * Costruttore della classe GestioneCamereServiceImpl.
      *
-     * @param cameraRepository il repository per la gestione delle camere
-     * @param prenotazioneRepository il repository per la gestione delle prenotazioni
+     * @param cameraRepository il repository per l'entità {@link Camera}
+     * @param prenotazioneRepository il repository per l'entità {@link Prenotazione}
      */
     public GestioneCamereServiceImpl(CameraRepository cameraRepository, PrenotazioneRepository prenotazioneRepository) {
         this.cameraRepository = cameraRepository;
