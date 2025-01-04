@@ -4,8 +4,16 @@ import it.unisa.hotelcampus.model.entity.Utente;
 import org.springframework.stereotype.Service;
 import java.util.*;
 
+/**
+ * Servizio per la gestione delle regole di Access Control List (ACL).
+ * Determina se un utente con un determinato ruolo può accedere a un metodo specifico.
+ */
 @Service
 public class ACLService {
+
+  /**
+   * Mappa che associa il nome completo del metodo alle liste di ruoli autorizzati.
+   */
   private static final Map<String, List<Utente.Ruolo>> ACL_MAP = new HashMap<>();
 
   static {
@@ -28,7 +36,13 @@ public class ACLService {
     ACL_MAP.put("GestioneUtentiServiceImpl.setRuolo(..)", List.of(Utente.Ruolo.DIRETTORE));
   }
 
-
+  /**
+   * Verifica se un utente con un determinato ruolo può accedere a un metodo specifico.
+   *
+   * @param fullMethodName il nome completo del metodo (classe.metodo(..))
+   * @param role           il ruolo dell'utente
+   * @return {@code true} se l'utente può accedere al metodo, {@code false} altrimenti
+   */
   public boolean canAccess(String fullMethodName, Utente.Ruolo role) {
     List<Utente.Ruolo> allowedRoles = ACL_MAP.get(fullMethodName);
     return allowedRoles != null && allowedRoles.contains(role);

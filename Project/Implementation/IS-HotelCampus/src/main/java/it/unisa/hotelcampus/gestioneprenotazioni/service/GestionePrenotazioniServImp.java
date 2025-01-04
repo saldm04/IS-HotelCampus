@@ -13,6 +13,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+/**
+ * Implementazione del servizio di gestione delle prenotazioni.
+ * Fornisce metodi per creare, eliminare, recuperare e cercare prenotazioni.
+ */
 @Service
 public class GestionePrenotazioniServImp implements GestionePrenotazioniService {
 
@@ -21,6 +25,13 @@ public class GestionePrenotazioniServImp implements GestionePrenotazioniService 
   private ClienteDettagliRepository clienteDettagliRepository;
 
 
+  /**
+   * Costruttore della classe GestionePrenotazioniServiceImpl.
+   *
+   * @param gestioneCamereService      il servizio di gestione delle camere
+   * @param prenotazioneRepository     il repository per la gestione delle prenotazioni
+   * @param clienteDettagliRepository  il repository per la gestione dei dettagli dei clienti
+   */
   public GestionePrenotazioniServImp(final GestioneCamereServiceImpl gestioneCamereService,
                                      final PrenotazioneRepository prenotazioneRepository,
                                      final ClienteDettagliRepository clienteDettagliRepository
@@ -31,15 +42,24 @@ public class GestionePrenotazioniServImp implements GestionePrenotazioniService 
     this.clienteDettagliRepository = clienteDettagliRepository;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   @ControllaACL
   public Collection<Prenotazione> getPrenotazioni() {
     return List.of();
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   @ControllaACL
-  public Prenotazione creaPrenotazione(Date dataCheckIn, Date dataCheckOut, int numeroOspiti, Camera camera, Set<ServizioPrenotato> servizi, ClienteDettagli cliente) {
+  public Prenotazione creaPrenotazione(Date dataCheckIn, Date dataCheckOut,
+                                       int numeroOspiti, Camera camera,
+                                       Set<ServizioPrenotato> servizi, ClienteDettagli cliente
+  ) {
     if (dataCheckIn == null || dataCheckOut == null) {
       throw new IllegalArgumentException("Le date di check-in e check-out non possono essere nulle");
     }
@@ -111,12 +131,18 @@ public class GestionePrenotazioniServImp implements GestionePrenotazioniService 
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   @ControllaACL
   public boolean eliminaPrenotazione(Prenotazione prenotazione) {
     return false;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   @ControllaACL
   public Collection<Prenotazione> cercaPrenotazioni(

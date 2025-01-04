@@ -45,7 +45,7 @@
 
         <!-- Se ricerca effettuata e utente loggato -->
         <button type="button" class="prenotaOra"
-                th:if="${ricercaEffettuata} and ${utente != null}"
+                th:if="${ricercaEffettuata} and ${utente != null} and ${utente != null ? utente.getRuolo() == T(it.unisa.hotelcampus.model.entity.Utente.Ruolo).CLIENTE : false}"
                 th:onclick="mostraModale([[${camera.getId()}]], [[${camera.getNumero()}]], [[${camera.getCosto()}]])">
             Prenota ora
         </button>
@@ -55,6 +55,14 @@
                 th:if="${ricercaEffettuata} and ${utente == null}">
             Prenota ora
         </button>
+
+        <button type="button" class="prenotaOra"
+                th:if="${ricercaEffettuata} and ${utente != null} and ${utente != null ? utente.getRuolo() != T(it.unisa.hotelcampus.model.entity.Utente.Ruolo).CLIENTE : false}"
+                onclick="alert('Il tuo ruolo non consente la finalizzazione di una prenotazione')">
+
+            Prenota ora
+        </button>
+
     </div>
 </div>
 
