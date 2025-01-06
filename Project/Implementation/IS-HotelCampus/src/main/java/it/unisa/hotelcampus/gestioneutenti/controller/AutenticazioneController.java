@@ -1,6 +1,6 @@
 package it.unisa.hotelcampus.gestioneutenti.controller;
 
-import it.unisa.hotelcampus.gestioneutenti.services.GestioneUtentiService;
+import it.unisa.hotelcampus.gestioneutenti.service.GestioneUtentiService;
 import it.unisa.hotelcampus.model.entity.Utente;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;

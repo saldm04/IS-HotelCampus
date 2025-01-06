@@ -84,7 +84,9 @@ public class GestionePrenotazioniServImp implements GestionePrenotazioniService 
     if (dataCheckOut.before(dataCheckIn)) {
       throw new IllegalArgumentException("La data di check-out non può essere precedente alla data di check-in");
     }
-
+    if(dataCheckOut.equals(dataCheckIn)) {
+      throw new IllegalArgumentException("La data di check-out non può essere uguale alla data di check-in");
+    }
     if (numeroOspiti <= 0) {
       throw new IllegalArgumentException("Il numero di ospiti deve essere maggiore di 0");
     }

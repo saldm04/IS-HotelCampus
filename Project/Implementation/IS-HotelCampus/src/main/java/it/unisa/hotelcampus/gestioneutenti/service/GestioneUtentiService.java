@@ -1,4 +1,4 @@
-package it.unisa.hotelcampus.gestioneutenti.services;
+package it.unisa.hotelcampus.gestioneutenti.service;
 
 import it.unisa.hotelcampus.model.entity.Utente;
 
