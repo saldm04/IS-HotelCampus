@@ -1,0 +1,13 @@
+it.unisa.hotelcampus
+it.unisa.hotelcampus.gestionecamere.controller
+it.unisa.hotelcampus.gestionecamere.service
+it.unisa.hotelcampus.gestioneprenotazioni.controller
+it.unisa.hotelcampus.gestioneprenotazioni.service
+it.unisa.hotelcampus.gestioneservizi.controller
+it.unisa.hotelcampus.gestioneservizi.service
+it.unisa.hotelcampus.gestioneutenti.controller
+it.unisa.hotelcampus.gestioneutenti.services
+it.unisa.hotelcampus.model.dao
+it.unisa.hotelcampus.model.entity
+it.unisa.hotelcampus.utils
+it.unisa.hotelcampus.utils.acl
