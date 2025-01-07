@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(it.unisa.hotelcampus.gestioneutenti.controller.AutenticazioneController.class)
-public class AutenticazioneControllerTest {
+public class AutenthControlTest {
 
   @Autowired
   private MockMvc mockMvc;
