@@ -2,7 +2,7 @@ package it.unisa.hotelcampus.model.entity;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 /**
@@ -27,21 +27,19 @@ public class Prenotazione {
      * Data in cui è stata effettuata la prenotazione.
      */
     @Column(nullable = false)
-    private Date dataPrenotazione;
+    private LocalDate dataPrenotazione;
 
     /**
      * Data di check-in prevista per la prenotazione.
      */
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date dataCheckIn;
+    private LocalDate dataCheckIn;
 
     /**
      * Data di check-out prevista per la prenotazione.
      */
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date dataCheckOut;
+    private LocalDate dataCheckOut;
 
     /**
      * Numero di ospiti inclusi nella prenotazione.
@@ -97,7 +95,7 @@ public class Prenotazione {
      * @param serviziPrenotati     l'insieme dei servizi prenotati
      * @param cliente              il cliente che effettua la prenotazione
      */
-    public Prenotazione(Date dataPrenotazione, Date dataCheckIn, Date dataCheckOut, int numeroOspiti, Camera camera, Set<ServizioPrenotato> serviziPrenotati, ClienteDettagli cliente) {
+    public Prenotazione(LocalDate dataPrenotazione, LocalDate dataCheckIn, LocalDate dataCheckOut, int numeroOspiti, Camera camera, Set<ServizioPrenotato> serviziPrenotati, ClienteDettagli cliente) {
         this.dataPrenotazione = dataPrenotazione;
         this.dataCheckIn = dataCheckIn;
         this.dataCheckOut = dataCheckOut;
@@ -132,7 +130,7 @@ public class Prenotazione {
      *
      * @return la data di prenotazione
      */
-    public Date getDataPrenotazione() {
+    public LocalDate getDataPrenotazione() {
         return dataPrenotazione;
     }
 
@@ -141,7 +139,7 @@ public class Prenotazione {
      *
      * @param dataPrenotazione la data di prenotazione da assegnare
      */
-    public void setDataPrenotazione(Date dataPrenotazione) {
+    public void setDataPrenotazione(LocalDate dataPrenotazione) {
         this.dataPrenotazione = dataPrenotazione;
     }
 
@@ -150,7 +148,7 @@ public class Prenotazione {
      *
      * @return la data di check-in
      */
-    public Date getDataCheckIn() {
+    public LocalDate getDataCheckIn() {
         return dataCheckIn;
     }
 
@@ -159,7 +157,7 @@ public class Prenotazione {
      *
      * @param dataCheckIn la data di check-in da assegnare
      */
-    public void setDataCheckIn(Date dataCheckIn) {
+    public void setDataCheckIn(LocalDate dataCheckIn) {
         this.dataCheckIn = dataCheckIn;
     }
 
@@ -168,7 +166,7 @@ public class Prenotazione {
      *
      * @return la data di check-out
      */
-    public Date getDataCheckOut() {
+    public LocalDate getDataCheckOut() {
         return dataCheckOut;
     }
 
@@ -177,7 +175,7 @@ public class Prenotazione {
      *
      * @param dataCheckOut la data di check-out da assegnare
      */
-    public void setDataCheckOut(Date dataCheckOut) {
+    public void setDataCheckOut(LocalDate dataCheckOut) {
         this.dataCheckOut = dataCheckOut;
     }
 

@@ -3,8 +3,8 @@ package it.unisa.hotelcampus.gestionecamere.controller;
 import it.unisa.hotelcampus.gestionecamere.service.GestioneCamereService;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 
 import it.unisa.hotelcampus.model.entity.Camera;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,8 +63,8 @@ public class CameraController {
      * Gestisce la richiesta POST per filtrare le camere disponibili
      * per la prenotazione, in base a check-in, check-out e numero di ospiti.
      *
-     * @param checkIn      la data di check-in
-     * @param checkOut     la data di check-out
+     * @param checkInDate      la data di check-in
+     * @param checkOutDate     la data di check-out
      * @param numeroOspiti il numero di ospiti
      * @param model        il modello da utilizzare per aggiungere attributi
      * @return il nome della vista "prenotaOra"
@@ -72,22 +72,25 @@ public class CameraController {
     @PostMapping("/disponibiliPerPrenotazione")
     public String mostraCamereDisponibili(
             @RequestParam(value = "checkindate", required = false)
-            @DateTimeFormat(pattern = "yyyy-MM-dd") Date checkIn,
+            String checkInDate,
             @RequestParam(value = "checkoutdate", required = false)
-            @DateTimeFormat(pattern = "yyyy-MM-dd") Date checkOut,
+            String checkOutDate,
             @RequestParam(value = "numOspiti", required = false)
             Integer numeroOspiti,
             Model model) {
 
+        LocalDate checkIn = LocalDate.parse(checkInDate);
+        LocalDate checkOut = LocalDate.parse(checkOutDate);
+
         try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
 
             model.addAttribute("camere", gestioneCamereService
                     .getCamereDisponibili(checkIn, checkOut, numeroOspiti));
             model.addAttribute("checkIn",
-                    checkIn != null ? dateFormat.format(checkIn) : "");
+                    checkIn != null ? checkIn : "");
             model.addAttribute("checkOut",
-                    checkOut != null ? dateFormat.format(checkOut) : "");
+                    checkOut != null ? checkOut : "");
             model.addAttribute("numeroOspiti", numeroOspiti);
             model.addAttribute("ricercaEffettuata", true);
 

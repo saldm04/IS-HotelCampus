@@ -4,6 +4,7 @@ import it.unisa.hotelcampus.gestioneprenotazioni.service.GestionePrenotazioniSer
 import it.unisa.hotelcampus.model.dao.CameraRepository;
 import it.unisa.hotelcampus.model.dao.ServizioRepository;
 import it.unisa.hotelcampus.model.entity.*;
+import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -133,11 +134,30 @@ public class PrenotazioniController {
             @SessionAttribute("utente") Utente utente,
             Model model
     ){
-        System.out.println("\n\n\nParametri ricevuti: " + quantita +"\n\n\n");
 
+        System.out.println("\n\n\n");
+        System.out.println("quantita: " + quantita);
+        System.out.println("numeroCamera: " + numeroCamera);
+        System.out.println("numeroOspiti: " + numeroOspiti);
+        System.out.println("checkIn: " + checkIn);
+        System.out.println("checkOut: " + checkOut);
+        System.out.println("utente: " + utente);
+        System.out.println("\n\n\n");
         Camera camera = cameraRepository.findById(numeroCamera).orElse(null);
-        Date dataCheckIn = Date.valueOf(checkIn);
-        Date dataCheckOut = Date.valueOf(checkOut);
+
+        if(checkIn.trim().equals("")){
+            model.addAttribute("generalError", "Nessuna data di check-in selezionata");
+            return "error";
+        }
+
+        if(checkOut.trim().equals("")){
+            model.addAttribute("generalError", "Nessuna data di check-out selezionata");
+            return "error";
+        }
+
+
+        LocalDate dataCheckIn = LocalDate.parse(checkIn);
+        LocalDate dataCheckOut = LocalDate.parse(checkOut);
 
         Set<ServizioPrenotato> serviziPrenotati = new HashSet<>();
 
@@ -176,6 +196,8 @@ public class PrenotazioniController {
             model.addAttribute("generalError", e.getMessage());
             return "error";
         }
+
+        System.out.println("error non trovati");
 
         return "confermaPrenotazione";
     }

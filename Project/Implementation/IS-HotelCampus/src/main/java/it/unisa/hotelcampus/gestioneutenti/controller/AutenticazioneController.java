@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
+
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -122,7 +122,7 @@ public class AutenticazioneController {
             @RequestParam String nazionalita,
             Model model
     ){
-        Date dataDiNascita = Date.valueOf(dataNascita);
+        LocalDate dataDiNascita = LocalDate.parse(dataNascita);
         try {
             Utente utente = gestioneUtentiService.creaUtente(nome, cognome, dataDiNascita, nazionalita, email, password);
         } catch (Exception e){

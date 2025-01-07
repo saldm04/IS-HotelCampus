@@ -5,8 +5,8 @@ import it.unisa.hotelcampus.model.entity.ClienteDettagli;
 import it.unisa.hotelcampus.model.entity.Prenotazione;
 import it.unisa.hotelcampus.model.entity.ServizioPrenotato;
 
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Set;
 
 /**
@@ -38,7 +38,7 @@ public interface GestionePrenotazioniService {
      * @return l'oggetto {@link Prenotazione} appena creata
      * @throws IllegalArgumentException se uno dei parametri è invalido
      */
-    Prenotazione creaPrenotazione(Date dataCheckIn, Date dataCheckOut,
+    Prenotazione creaPrenotazione(LocalDate dataCheckIn, LocalDate dataCheckOut,
                                   int numeroOspiti, Camera camera,
                                   Set<ServizioPrenotato> servizi, ClienteDettagli cliente
     );
@@ -67,6 +67,6 @@ public interface GestionePrenotazioniService {
      *
      * @throws IllegalArgumentException se uno dei parametri è invalido
      */
-    Collection<Prenotazione> cercaPrenotazioni(String email, Date checkIn, Date checkOut);
+    Collection<Prenotazione> cercaPrenotazioni(String email, LocalDate checkIn, LocalDate checkOut);
 
 }

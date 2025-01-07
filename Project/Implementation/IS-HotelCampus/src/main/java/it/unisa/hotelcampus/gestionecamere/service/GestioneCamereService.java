@@ -3,6 +3,7 @@ package it.unisa.hotelcampus.gestionecamere.service;
 
 import it.unisa.hotelcampus.model.entity.Camera;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 
@@ -68,7 +69,7 @@ public interface GestioneCamereService {
      * @throws IllegalArgumentException se uno dei parametri è invalido
      */
     Collection<Camera> getCamereDisponibili(
-            Date checkIn, Date checkOut, int numeroOspiti
+            LocalDate checkIn, LocalDate checkOut, int numeroOspiti
     );
 
     /**
@@ -81,5 +82,5 @@ public interface GestioneCamereService {
      * false altrimenti
      * @throws IllegalArgumentException se uno dei parametri è invalido
      */
-    boolean verificaDisponibilita(Camera camera, Date checkIn, Date checkOut);
+    boolean verificaDisponibilita(Camera camera, LocalDate checkIn, LocalDate checkOut);
 }

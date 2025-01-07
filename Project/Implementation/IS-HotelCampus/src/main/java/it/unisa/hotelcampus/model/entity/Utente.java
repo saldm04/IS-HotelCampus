@@ -2,7 +2,7 @@ package it.unisa.hotelcampus.model.entity;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  * Rappresenta un utente del sistema HotelCampus.
@@ -43,8 +43,7 @@ public class Utente {
      * Data di nascita dell'utente.
      */
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date dataNascita;
+    private LocalDate dataNascita;
 
     /**
      * Nazionalità dell'utente.
@@ -80,7 +79,7 @@ public class Utente {
      * @param dataNascita  la data di nascita dell'utente
      * @param nazionalita  la nazionalità dell'utente
      */
-    public Utente(String email, String password, String nome, String cognome, Date dataNascita, String nazionalita) {
+    public Utente(String email, String password, String nome, String cognome, LocalDate dataNascita, String nazionalita) {
         this.email = email;
         this.password = password;
         this.nome = nome;
@@ -113,7 +112,7 @@ public class Utente {
      *
      * @return la data di nascita
      */
-    public Date getDataNascita() {
+    public LocalDate getDataNascita() {
         return dataNascita;
     }
 
@@ -122,7 +121,7 @@ public class Utente {
      *
      * @param dataNascita la data di nascita da assegnare
      */
-    public void setDataNascita(Date dataNascita) {
+    public void setDataNascita(LocalDate dataNascita) {
         this.dataNascita = dataNascita;
     }
 

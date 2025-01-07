@@ -7,8 +7,8 @@ import it.unisa.hotelcampus.utils.acl.ControllaACL;
 import it.unisa.hotelcampus.model.entity.Prenotazione;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 
 /**
  * Implementazione del servizio {@link GestioneCamereService}.
@@ -64,12 +64,12 @@ public class GestioneCamereServiceImpl implements GestioneCamereService {
      * {@inheritDoc}
      */
     @Override
-    public Collection<Camera> getCamereDisponibili(Date checkIn, Date checkOut, int numeroOspiti) {
+    public Collection<Camera> getCamereDisponibili(LocalDate checkIn, LocalDate checkOut, int numeroOspiti) {
         if (checkIn == null || checkOut == null) {
             throw new IllegalArgumentException("Le date di check-in e check-out non possono essere nulle");
         }
 
-        if (checkIn.after(checkOut)) {
+        if (checkIn.isAfter(checkOut)) {
             throw new IllegalArgumentException("La data di check-in non può essere successiva alla data di check-out");
         }
 
@@ -85,7 +85,7 @@ public class GestioneCamereServiceImpl implements GestioneCamereService {
      */
     @Override
     @ControllaACL
-    public boolean verificaDisponibilita(Camera camera, Date checkIn, Date checkOut) {
+    public boolean verificaDisponibilita(Camera camera, LocalDate checkIn, LocalDate checkOut) {
         return !prenotazioneRepository.existsPrenotazione(
                 camera.getId(),
                 checkIn,

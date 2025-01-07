@@ -11,6 +11,7 @@ import it.unisa.hotelcampus.model.entity.ServizioPrenotato;
 import it.unisa.hotelcampus.utils.acl.ControllaACL;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -60,7 +61,7 @@ public class GestionePrenotazioniServImp implements GestionePrenotazioniService 
    */
   @Override
   @ControllaACL
-  public Prenotazione creaPrenotazione(Date dataCheckIn, Date dataCheckOut,
+  public Prenotazione creaPrenotazione(LocalDate dataCheckIn, LocalDate dataCheckOut,
                                        int numeroOspiti, Camera camera,
                                        Set<ServizioPrenotato> servizi, ClienteDettagli cliente
   ) {
@@ -68,23 +69,18 @@ public class GestionePrenotazioniServImp implements GestionePrenotazioniService 
       throw new IllegalArgumentException("Le date di check-in e check-out non possono essere nulle");
     }
 
-    Calendar today = Calendar.getInstance();
-    today.set(Calendar.HOUR_OF_DAY, 0);
-    today.set(Calendar.MINUTE, 0);
-    today.set(Calendar.SECOND, 0);
-    today.set(Calendar.MILLISECOND, 0);
-
-    if (dataCheckIn.before(today.getTime())) {
+    if (dataCheckIn.isBefore(LocalDate.now())) {
       throw new IllegalArgumentException("La data di check-in non può essere precedente alla data odierna");
     }
 
-    if (dataCheckOut.before(today.getTime())) {
+    if (dataCheckOut.isBefore(LocalDate.now())) {
       throw new IllegalArgumentException("La data di check-out non può essere precedente alla data odierna");
     }
-    if (dataCheckOut.before(dataCheckIn)) {
+    if (dataCheckOut.isBefore(dataCheckIn)) {
       throw new IllegalArgumentException("La data di check-out non può essere precedente alla data di check-in");
     }
-    if(dataCheckOut.equals(dataCheckIn)) {
+
+    if(dataCheckOut.isEqual(dataCheckIn)) {
       throw new IllegalArgumentException("La data di check-out non può essere uguale alla data di check-in");
     }
     if (numeroOspiti <= 0) {
@@ -119,7 +115,7 @@ public class GestionePrenotazioniServImp implements GestionePrenotazioniService 
       }
 
       Prenotazione prenotazione = new Prenotazione(
-              new Date(), dataCheckIn, dataCheckOut,
+              LocalDate.now(), dataCheckIn, dataCheckOut,
               numeroOspiti, camera, servizi, cliente
       );
 
@@ -152,7 +148,7 @@ public class GestionePrenotazioniServImp implements GestionePrenotazioniService 
   @Override
   @ControllaACL
   public Collection<Prenotazione> cercaPrenotazioni(
-          final String email, final Date checkIn, final Date checkOut
+          final String email, final LocalDate checkIn, final LocalDate checkOut
   ) {
     return List.of();
   }

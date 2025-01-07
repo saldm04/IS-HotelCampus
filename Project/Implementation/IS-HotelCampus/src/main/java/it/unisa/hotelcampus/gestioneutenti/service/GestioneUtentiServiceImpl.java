@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -59,7 +59,7 @@ public class GestioneUtentiServiceImpl implements GestioneUtentiService {
      * {@inheritDoc}
      */
     @Override
-    public Utente creaUtente(String nome, String cognome, Date dataDiNascita, String nazionalita, String email, String password) {
+    public Utente creaUtente(String nome, String cognome, LocalDate dataDiNascita, String nazionalita, String email, String password) {
         if(nome == null ||  cognome == null || dataDiNascita == null || nazionalita == null  || email == null ||  password == null){
             throw new IllegalArgumentException("I campi non possono essere vuoti!");
         }
@@ -69,7 +69,7 @@ public class GestioneUtentiServiceImpl implements GestioneUtentiService {
         email = email.trim();
         password = password.trim();
 
-        if(nome.isEmpty() || cognome.isEmpty() || nazionalita.isEmpty() || email.isEmpty() || password.length() < 8 || dataDiNascita.after(new Date(System.currentTimeMillis()))){
+        if(nome.isEmpty() || cognome.isEmpty() || nazionalita.isEmpty() || email.isEmpty() || password.length() < 8 || dataDiNascita.isAfter(LocalDate.now())){
             throw new IllegalArgumentException("I campi non possono essere vuoti!");
         }
 

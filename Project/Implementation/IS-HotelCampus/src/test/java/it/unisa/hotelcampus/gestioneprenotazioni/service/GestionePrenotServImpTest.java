@@ -15,7 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -52,8 +52,8 @@ public class GestionePrenotServImpTest {
 
     @Test
     public void testCreaPrenotazione_TC1_DataCheckInNull_ThrowsException() {
-        Date dataCheckIn = null;
-        Date dataCheckOut = new Date(System.currentTimeMillis() + 10 * 24 * 60 * 60 * 1000);
+        LocalDate dataCheckIn = null;
+        LocalDate dataCheckOut = LocalDate.now().plusDays(10);
         int numeroOspiti = 2;
         Set<ServizioPrenotato> servizi = new HashSet<>();
 
@@ -70,8 +70,8 @@ public class GestionePrenotServImpTest {
 
     @Test
     public void testCreaPrenotazione_TC2_DataCheckInPassata_ThrowsException(){
-        Date dataCheckIn = new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
-        Date dataCheckOut = new Date(System.currentTimeMillis() + 10 * 24 * 60 * 60 * 1000);
+        LocalDate dataCheckIn = LocalDate.now().minusDays(1);
+        LocalDate dataCheckOut = LocalDate.now().plusDays(10);
         int numeroOspiti = 2;
         Set<ServizioPrenotato> servizi = new HashSet<>();
 
@@ -88,8 +88,8 @@ public class GestionePrenotServImpTest {
 
     @Test
     public void testCreaPrenotazione_TC3_DataCheckOutNull_ThrowsException(){
-        Date dataCheckIn = new Date(System.currentTimeMillis() + 5 * 24 * 60 * 60 * 1000);
-        Date dataCheckOut = null;
+        LocalDate dataCheckIn = LocalDate.now().plusDays(5);
+        LocalDate dataCheckOut = null;
         int numeroOspiti = 2;
         Set<ServizioPrenotato> servizi = new HashSet<>();
 
@@ -106,8 +106,8 @@ public class GestionePrenotServImpTest {
 
     @Test
     public void testCreaPrenotazione_TC4_DataCheckOutPrimaCheckIn_ThrowsException(){
-        Date dataCheckIn = new Date(System.currentTimeMillis() + 5 * 24 * 60 * 60 * 1000);
-        Date dataCheckOut = new Date(System.currentTimeMillis() + 2 * 24 * 60 * 60 * 1000);
+        LocalDate dataCheckIn = LocalDate.now().plusDays(5);
+        LocalDate dataCheckOut = LocalDate.now().plusDays(2);
         int numeroOspiti = 2;
         Set<ServizioPrenotato> servizi = new HashSet<>();
 
@@ -124,8 +124,10 @@ public class GestionePrenotServImpTest {
 
     @Test
     public void testCreaPrenotazione_TC5_DataCheckOutUgualeCheckIn_ThrowsException(){
-        Date dataCheckIn = new Date(System.currentTimeMillis() + 5 * 24 * 60 * 60 * 1000);
-        Date dataCheckOut = new Date(System.currentTimeMillis() + 5 * 24 * 60 * 60 * 1000);
+
+        LocalDate dataCheckIn = LocalDate.now().plusDays(5);
+        LocalDate dataCheckOut = LocalDate.now().plusDays(5);
+
         int numeroOspiti = 2;
         Set<ServizioPrenotato> servizi = new HashSet<>();
 
@@ -142,8 +144,9 @@ public class GestionePrenotServImpTest {
 
     @Test
     public void testCreaPrenotazione_TC6_NumeroOspitiMinoreUgualeZero_ThrowsException(){
-        Date dataCheckIn = new Date(System.currentTimeMillis() + 5 * 24 * 60 * 60 * 1000);
-        Date dataCheckOut = new Date(System.currentTimeMillis() + 10 * 24 * 60 * 60 * 1000);
+        LocalDate dataCheckIn = LocalDate.now().plusDays(5);
+        LocalDate dataCheckOut = LocalDate.now().plusDays(10);
+
         int numeroOspiti = 0;
         Set<ServizioPrenotato> servizi = new HashSet<>();
 
@@ -160,8 +163,8 @@ public class GestionePrenotServImpTest {
 
     @Test
     public void testCreaPrenotazione_TC7_NumeroOspitiMaggioreNumeroMaxOspiti_ThrowsException(){
-        Date dataCheckIn = new Date(System.currentTimeMillis() + 5 * 24 * 60 * 60 * 1000);
-        Date dataCheckOut = new Date(System.currentTimeMillis() + 10 * 24 * 60 * 60 * 1000);
+        LocalDate dataCheckIn = LocalDate.now().plusDays(5);
+        LocalDate dataCheckOut = LocalDate.now().plusDays(10);
         int numeroOspiti = 3;
         Set<ServizioPrenotato> servizi = new HashSet<>();
 
@@ -178,8 +181,8 @@ public class GestionePrenotServImpTest {
 
     @Test
     public void testCreaPrenotazione_TC8_CameraNull_ThrowsException(){
-        Date dataCheckIn = new Date(System.currentTimeMillis() + 5 * 24 * 60 * 60 * 1000);
-        Date dataCheckOut = new Date(System.currentTimeMillis() + 10 * 24 * 60 * 60 * 1000);
+        LocalDate dataCheckIn = LocalDate.now().plusDays(5);
+        LocalDate dataCheckOut = LocalDate.now().plusDays(10);
         int numeroOspiti = 2;
         Set<ServizioPrenotato> servizi = new HashSet<>();
 
@@ -196,8 +199,8 @@ public class GestionePrenotServImpTest {
 
     @Test
     public void testCreaPrenotazione_TC9_CameraNonDisponibile_ThrowsException(){
-        Date dataCheckIn = new Date(System.currentTimeMillis() + 5 * 24 * 60 * 60 * 1000);
-        Date dataCheckOut = new Date(System.currentTimeMillis() + 10 * 24 * 60 * 60 * 1000);
+        LocalDate dataCheckIn = LocalDate.now().plusDays(5);
+        LocalDate dataCheckOut = LocalDate.now().plusDays(10);
         int numeroOspiti = 2;
         Set<ServizioPrenotato> servizi = new HashSet<>();
 
@@ -215,8 +218,8 @@ public class GestionePrenotServImpTest {
 
     @Test
     public void testCreaPrenotazione_TC10_NumeroServiziMaggioreNumeroOspiti_ThrowsException(){
-        Date dataCheckIn = new Date(System.currentTimeMillis() + 5 * 24 * 60 * 60 * 1000);
-        Date dataCheckOut = new Date(System.currentTimeMillis() + 10 * 24 * 60 * 60 * 1000);
+        LocalDate dataCheckIn = LocalDate.now().plusDays(5);
+        LocalDate dataCheckOut = LocalDate.now().plusDays(10);
         int numeroOspiti = 2;
         Set<ServizioPrenotato> servizi = new HashSet<>();
         ServizioPrenotato servizio1 = new ServizioPrenotato();
@@ -241,8 +244,8 @@ public class GestionePrenotServImpTest {
 
     @Test
     public void testCreaPrenotazione_TC11_ClienteNull_ThrowsException(){
-        Date dataCheckIn = new Date(System.currentTimeMillis() + 5 * 24 * 60 * 60 * 1000);
-        Date dataCheckOut = new Date(System.currentTimeMillis() + 10 * 24 * 60 * 60 * 1000);
+        LocalDate dataCheckIn = LocalDate.now().plusDays(5);
+        LocalDate dataCheckOut = LocalDate.now().plusDays(10);
         int numeroOspiti = 2;
         Set<ServizioPrenotato> servizi = new HashSet<>();
 
@@ -259,14 +262,14 @@ public class GestionePrenotServImpTest {
 
     @Test
     public void testCreaPrenotazione_TC12_PrenotazioneEffettuata(){
-        Date dataCheckIn = new Date(System.currentTimeMillis());
-        Date dataCheckOut = new Date(System.currentTimeMillis() + 10 * 24 * 60 * 60 * 1000);
+        LocalDate dataCheckIn = LocalDate.now();
+        LocalDate dataCheckOut = LocalDate.now().plusDays(10);
         int numeroOspiti = 2;
         Set<ServizioPrenotato> servizi = new HashSet<>();
 
         when(gestioneCamereService.verificaDisponibilita(camera, dataCheckIn, dataCheckOut)).thenReturn(true);
 
-        Prenotazione prenotazione = new Prenotazione(new Date() , dataCheckIn, dataCheckOut, numeroOspiti, camera, servizi, clienteAutenticato);
+        Prenotazione prenotazione = new Prenotazione(LocalDate.now() , dataCheckIn, dataCheckOut, numeroOspiti, camera, servizi, clienteAutenticato);
         when(prenotazioneRepository.save(any(Prenotazione.class))).thenReturn(prenotazione);
 
         Prenotazione risultato = gestionePrenotazioniServImp.creaPrenotazione(dataCheckIn, dataCheckOut, numeroOspiti, camera, servizi, clienteAutenticato);
@@ -292,14 +295,14 @@ public class GestionePrenotServImpTest {
 
     @Test
     public void testCreaPrenotazione_TC13_PrenotazioneEffettuata(){
-        Date dataCheckIn = new Date(System.currentTimeMillis() + 5 * 24 * 60 * 60 * 1000);
-        Date dataCheckOut = new Date(System.currentTimeMillis() + 10 * 24 * 60 * 60 * 1000);
+        LocalDate dataCheckIn = LocalDate.now().plusDays(5);
+        LocalDate dataCheckOut = LocalDate.now().plusDays(10);
         int numeroOspiti = 2;
         Set<ServizioPrenotato> servizi = new HashSet<>();
 
         when(gestioneCamereService.verificaDisponibilita(camera, dataCheckIn, dataCheckOut)).thenReturn(true);
 
-        Prenotazione prenotazione = new Prenotazione(new Date() , dataCheckIn, dataCheckOut, numeroOspiti, camera, servizi, clienteAutenticato);
+        Prenotazione prenotazione = new Prenotazione(LocalDate.now() , dataCheckIn, dataCheckOut, numeroOspiti, camera, servizi, clienteAutenticato);
         when(prenotazioneRepository.save(any(Prenotazione.class))).thenReturn(prenotazione);
 
         Prenotazione risultato = gestionePrenotazioniServImp.creaPrenotazione(dataCheckIn, dataCheckOut, numeroOspiti, camera, servizi, clienteAutenticato);
@@ -325,8 +328,8 @@ public class GestionePrenotServImpTest {
 
     @Test
     public void testCreaPrenotazione_TC14_PrenotazioneEffettuata(){
-        Date dataCheckIn = new Date(System.currentTimeMillis() + 5 * 24 * 60 * 60 * 1000);
-        Date dataCheckOut = new Date(System.currentTimeMillis() + 10 * 24 * 60 * 60 * 1000);
+        LocalDate dataCheckIn = LocalDate.now().plusDays(5);
+        LocalDate dataCheckOut = LocalDate.now().plusDays(10);
         int numeroOspiti = 2;
         Set<ServizioPrenotato> servizi = new HashSet<>();
         ServizioPrenotato servizio1 = new ServizioPrenotato();
@@ -340,7 +343,7 @@ public class GestionePrenotServImpTest {
 
         when(gestioneCamereService.verificaDisponibilita(camera, dataCheckIn, dataCheckOut)).thenReturn(true);
 
-        Prenotazione prenotazione = new Prenotazione(new Date() , dataCheckIn, dataCheckOut, numeroOspiti, camera, servizi, clienteAutenticato);
+        Prenotazione prenotazione = new Prenotazione(LocalDate.now() , dataCheckIn, dataCheckOut, numeroOspiti, camera, servizi, clienteAutenticato);
         when(prenotazioneRepository.save(any(Prenotazione.class))).thenReturn(prenotazione);
 
         Prenotazione risultato = gestionePrenotazioniServImp.creaPrenotazione(dataCheckIn, dataCheckOut, numeroOspiti, camera, servizi, clienteAutenticato);
@@ -369,8 +372,8 @@ public class GestionePrenotServImpTest {
 
     @Test
     public void testCreaPrenotazione_TC15_PrenotazioneEffettuata(){
-        Date dataCheckIn = new Date(System.currentTimeMillis());
-        Date dataCheckOut = new Date(System.currentTimeMillis() + 10 * 24 * 60 * 60 * 1000);
+        LocalDate dataCheckIn = LocalDate.now();
+        LocalDate dataCheckOut = LocalDate.now().plusDays(10);
         int numeroOspiti = 2;
         Set<ServizioPrenotato> servizi = new HashSet<>();
         ServizioPrenotato servizio1 = new ServizioPrenotato();
@@ -384,7 +387,7 @@ public class GestionePrenotServImpTest {
 
         when(gestioneCamereService.verificaDisponibilita(camera, dataCheckIn, dataCheckOut)).thenReturn(true);
 
-        Prenotazione prenotazione = new Prenotazione(new Date() , dataCheckIn, dataCheckOut, numeroOspiti, camera, servizi, clienteAutenticato);
+        Prenotazione prenotazione = new Prenotazione(LocalDate.now() , dataCheckIn, dataCheckOut, numeroOspiti, camera, servizi, clienteAutenticato);
         when(prenotazioneRepository.save(any(Prenotazione.class))).thenReturn(prenotazione);
 
         Prenotazione risultato = gestionePrenotazioniServImp.creaPrenotazione(dataCheckIn, dataCheckOut, numeroOspiti, camera, servizi, clienteAutenticato);

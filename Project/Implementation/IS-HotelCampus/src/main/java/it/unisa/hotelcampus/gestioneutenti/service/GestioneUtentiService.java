@@ -1,8 +1,7 @@
 package it.unisa.hotelcampus.gestioneutenti.service;
 
 import it.unisa.hotelcampus.model.entity.Utente;
-
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Collection;
 
 /**
@@ -35,7 +34,7 @@ public interface GestioneUtentiService {
      * @return l'oggetto {@link Utente} creato
      * @throws IllegalArgumentException se uno dei parametri è invalido
      */
-    Utente creaUtente(String nome, String cognome, Date dataDiNascita, String nazionalita, String email, String password);
+    Utente creaUtente(String nome, String cognome, LocalDate dataDiNascita, String nazionalita, String email, String password);
 
     /**
      * Elimina un account utente dal sistema.

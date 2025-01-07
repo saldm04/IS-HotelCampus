@@ -4,6 +4,7 @@ import it.unisa.hotelcampus.model.entity.Prenotazione;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -32,5 +33,5 @@ public interface PrenotazioneRepository extends JpaRepository<Prenotazione, Long
             OR (:dataCheckIn < p.dataCheckOut AND p.dataCheckOut < :dataCheckOut)     
             )   
     """)
-    boolean existsPrenotazione(Long cameraId, Date dataCheckIn, Date dataCheckOut);
+    boolean existsPrenotazione(Long cameraId, LocalDate dataCheckIn, LocalDate dataCheckOut);
 }
