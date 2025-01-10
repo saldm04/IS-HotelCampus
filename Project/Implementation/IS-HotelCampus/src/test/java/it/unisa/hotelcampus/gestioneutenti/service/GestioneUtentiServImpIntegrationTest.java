@@ -1,6 +1,9 @@
 package it.unisa.hotelcampus.gestioneutenti.service;
 
 import it.unisa.hotelcampus.model.dao.UtenteRepository;
+import it.unisa.hotelcampus.model.entity.Camera;
+import it.unisa.hotelcampus.model.entity.ClienteDettagli;
+import it.unisa.hotelcampus.model.entity.Servizio;
 import it.unisa.hotelcampus.model.entity.Utente;
 import it.unisa.hotelcampus.utils.PasswordHash;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,46 +11,49 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
-public class GestioneUtentiServImpTest {
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
+@Transactional
+@ActiveProfiles("test")
+public class GestioneUtentiServImpIntegrationTest {
 
-  @Mock
+  @Autowired
   private UtenteRepository utenteRepository;
 
-  @InjectMocks
+  @Autowired
   private GestioneUtentiServiceImpl gestioneUtentiService;
 
+  private Utente utente;
 
-  private Utente utenteRossi;
 
   @BeforeEach
   public void setUp() {
-
-    utenteRossi = new Utente();
-    utenteRossi.setEmail("mariorossi@gmail.com");
-    utenteRossi.setPassword(PasswordHash.toHash("Mario1234"));
+    utente = new Utente("mariorossi@gmail.com", PasswordHash.toHash("Mario1234"), "mario", "rossi", LocalDate.of(1900, 1, 1), "Italia");
+    utenteRepository.save(utente);
   }
 
   @Test
   public void testAutentica_TC16_Success() {
-
-    when(utenteRepository.findById("mariorossi@gmail.com")).thenReturn(Optional.ofNullable(utenteRossi));
-
     Utente risultato = gestioneUtentiService.autentica("mariorossi@gmail.com", "Mario1234");
 
-    assertEquals(utenteRossi.getEmail(), risultato.getEmail(), "Autenticazione riuscita: utente autenticato");
-
+    assertEquals(utente.getEmail(), risultato.getEmail(), "Autenticazione riuscita: utente autenticato");
   }
 
   @Test
   public void testAutentica_TC17_PasswordErrata() {
-
-    when(utenteRepository.findById("mariorossi@gmail.com")).thenReturn(Optional.ofNullable(utenteRossi));
 
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
       gestioneUtentiService.autentica("mariorossi@gmail.com", "Password1234");
@@ -60,13 +66,13 @@ public class GestioneUtentiServImpTest {
   @Test
   public void testAutentica_TC18_EmailNonPresente() {
 
-    when(utenteRepository.findById("mariabianchi@gmail.com")).thenReturn(Optional.empty());
-
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
       gestioneUtentiService.autentica("mariabianchi@gmail.com", "Password1234");
     });
 
     assertEquals("L'email inserita non è associata ad alcun account!", exception.getMessage(), "Autenticazione fallita: credenziali errate");
-  }
 
+    //contralla che non esiste un utente con quella email nel db
+    assertEquals(utenteRepository.findById("mariabianchi@gmail.com"), Optional.empty());
+  }
 }
