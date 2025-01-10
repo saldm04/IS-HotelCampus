@@ -23,6 +23,4 @@ public interface UtenteRepository extends JpaRepository<Utente, String> {
      * @return una collezione di utenti che hanno il ruolo specificato
      */
     Collection<Utente> findAllByRuolo(Utente.Ruolo ruolo);
-
-  Object findByEmail(String mail);
 }
