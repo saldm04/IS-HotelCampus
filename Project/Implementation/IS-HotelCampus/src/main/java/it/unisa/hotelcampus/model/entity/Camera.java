@@ -69,7 +69,7 @@ public class Camera {
     /**
      * Insieme delle prenotazioni associate a questa camera.
      */
-    @OneToMany(mappedBy = "camera", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "camera")
     private Set<Prenotazione> prenotazioni;
 
     /**
@@ -268,6 +268,9 @@ public class Camera {
      * @param prenotazione la prenotazione da aggiungere
      */
     public void addPrenotazione(Prenotazione prenotazione) {
+        if(this.prenotazioni == null) {
+            this.prenotazioni = new HashSet<>();
+        }
         this.prenotazioni.add(prenotazione);
     }
 }

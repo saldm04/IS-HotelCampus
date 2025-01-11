@@ -13,5 +13,4 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ClienteDettagliRepository extends JpaRepository<ClienteDettagli, String> {
-    // Altri metodi personalizzati possono essere aggiunti qui se necessario
 }

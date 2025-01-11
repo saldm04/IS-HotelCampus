@@ -2,13 +2,16 @@ package it.unisa.hotelcampus.gestioneprenotazioni.service;
 
 
 import it.unisa.hotelcampus.gestionecamere.service.GestioneCamereServiceImpl;
+import it.unisa.hotelcampus.model.dao.CameraRepository;
 import it.unisa.hotelcampus.model.dao.ClienteDettagliRepository;
 import it.unisa.hotelcampus.model.dao.PrenotazioneRepository;
+import it.unisa.hotelcampus.model.dao.ServizioPrenotatoRepository;
 import it.unisa.hotelcampus.model.entity.Camera;
 import it.unisa.hotelcampus.model.entity.ClienteDettagli;
 import it.unisa.hotelcampus.model.entity.Prenotazione;
 import it.unisa.hotelcampus.model.entity.ServizioPrenotato;
 import it.unisa.hotelcampus.utils.acl.ControllaACL;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -28,6 +31,8 @@ public class GestionePrenotazioniServImp implements GestionePrenotazioniService 
   private PrenotazioneRepository prenotazioneRepository;
   private GestioneCamereServiceImpl gestioneCamereService;
   private ClienteDettagliRepository clienteDettagliRepository;
+  private ServizioPrenotatoRepository servizioPrenotatoRepository;
+  private CameraRepository cameraRepository;
 
 
   /**
@@ -37,14 +42,19 @@ public class GestionePrenotazioniServImp implements GestionePrenotazioniService 
    * @param prenotazioneRepository     il repository per l'entità {@link Prenotazione}
    * @param clienteDettagliRepository  il repository per l'entità {@link ClienteDettagli}
    */
+  @Autowired
   public GestionePrenotazioniServImp(final GestioneCamereServiceImpl gestioneCamereService,
                                      final PrenotazioneRepository prenotazioneRepository,
-                                     final ClienteDettagliRepository clienteDettagliRepository
+                                     final ClienteDettagliRepository clienteDettagliRepository,
+                                     final ServizioPrenotatoRepository servizioPrenotatoRepository,
+                                     final CameraRepository cameraRepository
                                   ) {
 
     this.gestioneCamereService = gestioneCamereService;
     this.prenotazioneRepository = prenotazioneRepository;
     this.clienteDettagliRepository = clienteDettagliRepository;
+    this.servizioPrenotatoRepository = servizioPrenotatoRepository;
+    this.cameraRepository = cameraRepository;
   }
 
   /**
@@ -123,11 +133,12 @@ public class GestionePrenotazioniServImp implements GestionePrenotazioniService 
         servizio.setPrenotazione(prenotazione);
       }
 
+      cliente.creaPrenotazione(prenotazione);
+      camera.addPrenotazione(prenotazione);
+
       prenotazioneRepository.save(prenotazione);
 
-      cliente.creaPrenotazione(prenotazione);
-
-      clienteDettagliRepository.save(cliente);
+      System.out.println("Prenotazione creata: " + prenotazione.getId() + " " + prenotazione.getDataPrenotazione() + " " + prenotazione.getDataCheckIn() + " " + prenotazione.getDataCheckOut() + " " + prenotazione.getNumeroOspiti() + " " + prenotazione.getCamera().getNumero() + " " + prenotazione.getCliente().getEmail());
 
       return prenotazione;
     }

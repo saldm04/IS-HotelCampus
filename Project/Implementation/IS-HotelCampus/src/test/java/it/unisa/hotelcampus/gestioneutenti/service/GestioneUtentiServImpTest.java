@@ -9,9 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
+import static it.unisa.hotelcampus.utils.PasswordHash.toHash;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -71,22 +71,4 @@ public class GestioneUtentiServImpTest {
     assertEquals("L'email inserita non è associata ad alcun account!", exception.getMessage(), "Autenticazione fallita: credenziali errate");
   }
 
-  private static String toHash(String password) {
-    String hashString = null;
-
-    try {
-      java.security.MessageDigest digest = java.security.MessageDigest.getInstance("SHA-512");
-      byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-
-      StringBuilder sb = new StringBuilder();
-      for (byte b : hash) {
-        sb.append(String.format("%02x", b));
-      }
-      hashString = sb.toString();
-
-    } catch (java.security.NoSuchAlgorithmException e) {
-      System.out.println(e);
-    }
-    return hashString;
-  }
 }

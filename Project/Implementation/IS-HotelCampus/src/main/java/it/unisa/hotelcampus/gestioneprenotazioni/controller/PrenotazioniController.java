@@ -134,15 +134,6 @@ public class PrenotazioniController {
             @SessionAttribute("utente") Utente utente,
             Model model
     ){
-
-        System.out.println("\n\n\n");
-        System.out.println("quantita: " + quantita);
-        System.out.println("numeroCamera: " + numeroCamera);
-        System.out.println("numeroOspiti: " + numeroOspiti);
-        System.out.println("checkIn: " + checkIn);
-        System.out.println("checkOut: " + checkOut);
-        System.out.println("utente: " + utente);
-        System.out.println("\n\n\n");
         Camera camera = cameraRepository.findById(numeroCamera).orElse(null);
 
         if(checkIn.trim().equals("")){
@@ -196,8 +187,6 @@ public class PrenotazioniController {
             model.addAttribute("generalError", e.getMessage());
             return "error";
         }
-
-        System.out.println("error non trovati");
 
         return "confermaPrenotazione";
     }

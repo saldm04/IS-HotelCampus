@@ -1,6 +1,7 @@
 package it.unisa.hotelcampus.gestioneprenotazioni.service;
 
 import it.unisa.hotelcampus.gestionecamere.service.GestioneCamereServiceImpl;
+import it.unisa.hotelcampus.model.dao.CameraRepository;
 import it.unisa.hotelcampus.model.dao.ClienteDettagliRepository;
 import it.unisa.hotelcampus.model.dao.PrenotazioneRepository;
 import it.unisa.hotelcampus.model.entity.Camera;
@@ -124,10 +125,8 @@ public class GestionePrenotServImpTest {
 
     @Test
     public void testCreaPrenotazione_TC5_DataCheckOutUgualeCheckIn_ThrowsException(){
-
         LocalDate dataCheckIn = LocalDate.now().plusDays(5);
         LocalDate dataCheckOut = LocalDate.now().plusDays(5);
-
         int numeroOspiti = 2;
         Set<ServizioPrenotato> servizi = new HashSet<>();
 
@@ -146,7 +145,6 @@ public class GestionePrenotServImpTest {
     public void testCreaPrenotazione_TC6_NumeroOspitiMinoreUgualeZero_ThrowsException(){
         LocalDate dataCheckIn = LocalDate.now().plusDays(5);
         LocalDate dataCheckOut = LocalDate.now().plusDays(10);
-
         int numeroOspiti = 0;
         Set<ServizioPrenotato> servizi = new HashSet<>();
 
@@ -289,8 +287,6 @@ public class GestionePrenotServImpTest {
         assertEquals(camera, catturata.getCamera());
         assertEquals(servizi, catturata.getServiziPrenotati());
         assertEquals(0, catturata.getServiziPrenotati().size());
-
-        verify(clienteDettagliRepository, times(1)).save(clienteAutenticato);
     }
 
     @Test
@@ -322,8 +318,6 @@ public class GestionePrenotServImpTest {
         assertEquals(camera, catturata.getCamera());
         assertEquals(servizi, catturata.getServiziPrenotati());
         assertEquals(0, catturata.getServiziPrenotati().size());
-
-        verify(clienteDettagliRepository, times(1)).save(clienteAutenticato);
     }
 
     @Test
@@ -366,8 +360,6 @@ public class GestionePrenotServImpTest {
         assertEquals(2, catturata.getServiziPrenotati().size());
         assertTrue(catturata.getServiziPrenotati().contains(servizio1));
         assertTrue(catturata.getServiziPrenotati().contains(servizio2));
-
-        verify(clienteDettagliRepository, times(1)).save(clienteAutenticato);
     }
 
     @Test
@@ -410,7 +402,5 @@ public class GestionePrenotServImpTest {
         assertEquals(2, catturata.getServiziPrenotati().size());
         assertTrue(catturata.getServiziPrenotati().contains(servizio1));
         assertTrue(catturata.getServiziPrenotati().contains(servizio2));
-
-        verify(clienteDettagliRepository, times(1)).save(clienteAutenticato);
     }
 }

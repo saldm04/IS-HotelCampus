@@ -207,6 +207,15 @@ public class Prenotazione {
     }
 
     /**
+     * Imposta l'importo totale della prenotazione.
+     *
+     * @param importoTotale l'importo totale da assegnare
+     */
+    public void setImportoTotale(int importoTotale) {
+        this.importoTotale = importoTotale;
+    }
+
+    /**
      * Restituisce il costo unitario della camera al momento della prenotazione.
      *
      * @return il costo unitario della camera
@@ -240,6 +249,24 @@ public class Prenotazione {
      */
     public void setCamera(Camera camera) {
         this.camera = camera;
+    }
+
+    /**
+     * Restituisce il cliente che ha effettuato la prenotazione.
+     *
+     * @return il cliente che ha effettuato la prenotazione
+     */
+    public ClienteDettagli getCliente() {
+        return cliente;
+    }
+
+    /**
+     * Imposta il cliente che ha effettuato la prenotazione.
+     *
+     * @param cliente il cliente da assegnare
+     */
+    public void setCliente(ClienteDettagli cliente) {
+        this.cliente = cliente;
     }
 
     /**

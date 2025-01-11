@@ -21,6 +21,14 @@ import java.util.Date;
 public interface CameraRepository extends JpaRepository<Camera, Long> {
 
     /**
+     * Trova una camera per numero.
+     *
+     * @param numero il numero della camera
+     * @return la camera con il numero specificato, se esiste
+     */
+    Camera findByNumero(int numero);
+
+    /**
      * Recupera tutte le camere che non sono state eliminate.
      *
      * @return una collezione di camere non eliminate
