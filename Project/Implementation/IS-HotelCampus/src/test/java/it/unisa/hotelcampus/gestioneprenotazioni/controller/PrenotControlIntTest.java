@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @Transactional
 @ActiveProfiles("test")
-public class PrenotControlIntegrationTest {
+public class PrenotControlIntTest {
 
   @Autowired
   MockMvc mockMvc;

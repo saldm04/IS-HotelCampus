@@ -1,16 +1,11 @@
 package it.unisa.hotelcampus.gestioneutenti.service;
 
 import it.unisa.hotelcampus.model.dao.UtenteRepository;
-import it.unisa.hotelcampus.model.entity.Camera;
-import it.unisa.hotelcampus.model.entity.ClienteDettagli;
-import it.unisa.hotelcampus.model.entity.Servizio;
 import it.unisa.hotelcampus.model.entity.Utente;
 import it.unisa.hotelcampus.utils.PasswordHash;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -19,16 +14,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Optional;
-import java.util.Set;
+
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Transactional
 @ActiveProfiles("test")
-public class GestioneUtentiServImpIntegrationTest {
+public class GestUtentiServImpIntTest {
 
   @Autowired
   private UtenteRepository utenteRepository;
