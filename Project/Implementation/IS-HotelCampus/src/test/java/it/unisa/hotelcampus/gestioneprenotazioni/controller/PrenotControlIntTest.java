@@ -9,7 +9,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -78,7 +77,6 @@ public class PrenotControlIntTest {
 
     camera = new Camera(101, Camera.TipoCamera.STANDARD, 2, 20,100, "Images/Demo/Camere/101.JPEG");
     cameraRepository.save(camera);
-
   }
 
   @Test

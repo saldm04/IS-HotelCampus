@@ -29,7 +29,6 @@ public class AutenthControlTest {
 
   MockHttpSession session = new MockHttpSession();
 
-
   @BeforeEach
   public void setUp() {
 

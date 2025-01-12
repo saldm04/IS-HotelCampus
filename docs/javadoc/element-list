@@ -6,7 +6,7 @@ it.unisa.hotelcampus.gestioneprenotazioni.service
 it.unisa.hotelcampus.gestioneservizi.controller
 it.unisa.hotelcampus.gestioneservizi.service
 it.unisa.hotelcampus.gestioneutenti.controller
-it.unisa.hotelcampus.gestioneutenti.services
+it.unisa.hotelcampus.gestioneutenti.service
 it.unisa.hotelcampus.model.dao
 it.unisa.hotelcampus.model.entity
 it.unisa.hotelcampus.utils
