@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 let totale = 0;
+let tempCostoCamera = 0;
 
 function mostraModale(cameraId, numeroCamera, costoCamera) {
     console.log(cameraId); // Controlla se questo è il valore giusto (1 in questo caso)
@@ -45,7 +46,7 @@ function mostraModale(cameraId, numeroCamera, costoCamera) {
     const tbody = document.getElementById('serviceModalTbody');
     const totaleSpan = document.getElementById('modalTotale');
 
-    totale = costoCamera;
+    tempCostoCamera = costoCamera;
 
     // Ottieni i valori dal form
     const checkIn = document.getElementById('checkindate').value;
@@ -105,6 +106,7 @@ function mostraModale(cameraId, numeroCamera, costoCamera) {
 function aggiornaTotale(servizi) {
     const totaleSpan = document.getElementById('modalTotale');
 
+    totale = tempCostoCamera;
 
     document.querySelectorAll('.quantita-select').forEach(select => {
         const servizioId = select.name.match(/\[(\d+)\]/)[1];

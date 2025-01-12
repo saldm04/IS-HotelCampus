@@ -2,16 +2,15 @@ package it.unisa.hotelcampus.gestioneutenti.service;
 
 import it.unisa.hotelcampus.model.dao.UtenteRepository;
 import it.unisa.hotelcampus.model.entity.Utente;
+import it.unisa.hotelcampus.utils.PasswordHash;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.util.Optional;
 
-import static it.unisa.hotelcampus.utils.PasswordHash.toHash;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -32,7 +31,7 @@ public class GestioneUtentiServImpTest {
 
     utenteRossi = new Utente();
     utenteRossi.setEmail("mariorossi@gmail.com");
-    utenteRossi.setPassword(toHash("Mario1234"));
+    utenteRossi.setPassword(PasswordHash.toHash("Mario1234"));
   }
 
   @Test

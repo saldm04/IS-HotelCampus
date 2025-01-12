@@ -134,6 +134,7 @@ public class PrenotazioniController {
             @SessionAttribute("utente") Utente utente,
             Model model
     ){
+
         Camera camera = cameraRepository.findById(numeroCamera).orElse(null);
 
         if(checkIn.trim().equals("")){
@@ -160,7 +161,6 @@ public class PrenotazioniController {
                 try {
                     Long servizioId = Long.parseLong(idStr);
                     int quantitaServizio = Integer.parseInt(entry.getValue());
-
                     if (quantitaServizio > 0) {
                         Optional<Servizio> servizioOpt = servizioRepository.findById(servizioId);
                         if (servizioOpt.isPresent()) {
