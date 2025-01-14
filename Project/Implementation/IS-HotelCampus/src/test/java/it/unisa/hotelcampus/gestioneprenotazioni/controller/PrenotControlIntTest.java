@@ -6,6 +6,7 @@ import it.unisa.hotelcampus.model.entity.*;
 import it.unisa.hotelcampus.utils.PasswordHash;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -284,6 +286,22 @@ public class PrenotControlIntTest {
             .andExpect(model().attributeExists("generalError"))
             .andExpect(model().attribute("generalError", "Il numero di servizi non può essere maggiore del numero di ospiti"));
   }
+
+  @Test
+  public void testCreaPrenotazione_TC11_ClienteNull_ThrowsException() throws Exception {
+    LocalDate dataCheckIn = LocalDate.now().plusDays(5);
+    LocalDate dataCheckOut = LocalDate.now().plusDays(10);
+    Integer numeroOspiti = 2;
+
+    mockMvc.perform(post("/prenotazioni/confermaPrenotazione")
+                    .param("numeroCamera", camera.getId().toString())
+                    .param("numeroOspiti", numeroOspiti.toString())
+                    .param("checkIn", dataCheckIn.toString())
+                    .param("checkOut", dataCheckOut.toString())
+            )
+            .andExpect(status().is4xxClientError());
+  }
+
 
   @Test
   public void testCreaPrenotazione_TC12_PrenotazioneEffettuata() throws Exception {

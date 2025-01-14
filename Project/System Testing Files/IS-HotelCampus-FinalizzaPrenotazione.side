@@ -1,0 +1,2561 @@
+{
+  "id": "378a0db4-cf5f-4564-99f2-1ae2c2534c4e",
+  "version": "2.0",
+  "name": "IS-HotelCampus-FinalizzaPrenotazione",
+  "url": "http://localhost:8080/",
+  "tests": [{
+    "id": "5437b51a-25c6-4846-b01d-1bb924c458e5",
+    "name": "TC1",
+    "commands": [{
+      "id": "7af5f112-8fc5-4441-9944-394d8b3fa99b",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "94cbb620-9e34-4beb-9f6f-a0dbb30fb43b",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=div > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/login')]", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2ad19beb-dfb5-4da1-93c7-a227b3322d9d",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fcd2522f-b6a8-4249-adc0-a37a9fb931e3",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mariorossi@gmail.com"
+    }, {
+      "id": "94451646-b3dd-4717-9b4f-63468fab364f",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "448041db-6857-4db3-aef1-5dece6d26f5f",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Mario1234"
+    }, {
+      "id": "7f3d4052-3687-4c30-9e5d-d4029b2c02ce",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(6)",
+      "targets": [
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "742aeb62-03ed-466a-a6e8-6db8382c82fc",
+      "comment": "",
+      "command": "executeAsyncScript",
+      "target": "var form = document.createElement('form'); form.method = 'POST'; form.action = 'http://localhost:8080/prenotazioni/confermaPrenotazione'; form.setAttribute('enctype', 'application/x-www-form-urlencoded');  var currentDate = new Date();  var checkInDate = new Date(currentDate); checkInDate.setDate(currentDate.getDate() + 5);  var checkOutDate = new Date(currentDate); checkOutDate.setDate(currentDate.getDate() + 10);   var checkIn = checkInDate.toISOString().split('T')[0]; var checkOut = checkOutDate.toISOString().split('T')[0];  var numeroCamera = '2'; var numeroOspiti = '2';  var input1 = document.createElement('input'); input1.type = 'hidden'; input1.name = 'numeroCamera'; input1.value = numeroCamera; form.appendChild(input1);  var input2 = document.createElement('input'); input2.type = 'hidden'; input2.name = 'numeroOspiti'; input2.value = numeroOspiti; form.appendChild(input2);  var input3 = document.createElement('input'); input3.type = 'hidden'; input3.name = 'checkIn'; input3.value = ''; form.appendChild(input3);  var input4 = document.createElement('input'); input4.type = 'hidden'; input4.name = 'checkOut'; input4.value = checkOut; form.appendChild(input4);  document.body.appendChild(form); form.submit();",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7b538d81-18f4-4676-b30e-81ccc6ee7b2c",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.error-code",
+      "targets": [
+        ["css=.error-code", "css:finder"],
+        ["xpath=//div[4]/div", "xpath:position"]
+      ],
+      "value": "Ops qualcosa è andato storto: Nessuna data di check-in selezionata"
+    }, {
+      "id": "b244c405-74a7-45aa-8d63-be73f17db350",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/logout')]", "xpath:href"],
+        ["xpath=//div[3]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "76d3bae0-f44c-4112-8b93-c807dba5c119",
+    "name": "TC3",
+    "commands": [{
+      "id": "943d7bd4-dc26-4cf9-a871-8d405b854369",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a5a6a865-c90f-4286-849b-c623c1632c42",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=div > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/login')]", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "af447b23-c928-40aa-bebf-f9d696e084ac",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "377dcb4a-0f1e-442e-bd2c-e546823384af",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mariorossi@gmail.com"
+    }, {
+      "id": "8c5ebfa0-a642-429a-a64b-a8e77e666050",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a169cbd9-fc8d-4367-8066-7ed466b384a6",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Mario1234"
+    }, {
+      "id": "115f4799-3000-402a-8bd0-b8eb5ab80fe9",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(6)",
+      "targets": [
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cc66cbb7-b987-4821-a0e8-55aecf9091c1",
+      "comment": "",
+      "command": "executeAsyncScript",
+      "target": "var form = document.createElement('form'); form.method = 'POST'; form.action = 'http://localhost:8080/prenotazioni/confermaPrenotazione'; form.setAttribute('enctype', 'application/x-www-form-urlencoded');  var currentDate = new Date();  var checkInDate = new Date(currentDate); checkInDate.setDate(currentDate.getDate() + 5);  var checkOutDate = new Date(currentDate); checkOutDate.setDate(currentDate.getDate() + 10);   var checkIn = checkInDate.toISOString().split('T')[0]; var checkOut = checkOutDate.toISOString().split('T')[0];  var numeroCamera = '2'; var numeroOspiti = '2';  var input1 = document.createElement('input'); input1.type = 'hidden'; input1.name = 'numeroCamera'; input1.value = numeroCamera; form.appendChild(input1);  var input2 = document.createElement('input'); input2.type = 'hidden'; input2.name = 'numeroOspiti'; input2.value = numeroOspiti; form.appendChild(input2);  var input3 = document.createElement('input'); input3.type = 'hidden'; input3.name = 'checkIn'; input3.value = checkIn; form.appendChild(input3);  var input4 = document.createElement('input'); input4.type = 'hidden'; input4.name = 'checkOut'; input4.value = ''; form.appendChild(input4);  document.body.appendChild(form); form.submit();",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c4e510ab-363d-4657-a405-0c5b3580bbec",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.error-code",
+      "targets": [
+        ["css=.error-code", "css:finder"],
+        ["xpath=//div[4]/div", "xpath:position"]
+      ],
+      "value": "Ops qualcosa è andato storto: Nessuna data di check-out selezionata"
+    }, {
+      "id": "95a8f775-f299-4e22-bf82-9878c35b203a",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/logout')]", "xpath:href"],
+        ["xpath=//div[3]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "3389f4ee-8910-4044-aa0a-383aa3ebe4ee",
+    "name": "TC5",
+    "commands": [{
+      "id": "f54dcce9-ddd1-4939-b929-d9ca907a74d4",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "de5e229c-b3b9-40a5-adaf-e9c60261f771",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=div > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/login')]", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "bf4d80b7-0591-465f-95a9-90cce0bcc931",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "37cc5e06-63a6-4a80-a971-bf24768d52c3",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mariorossi@gmail.com"
+    }, {
+      "id": "7a12fb97-2b0b-4c40-97cd-10e3e17249ca",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f61328f1-6326-4f58-b671-2bfe2829ecb7",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Mario1234"
+    }, {
+      "id": "8667d37f-8432-4c06-a4d2-413842b13b38",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(6)",
+      "targets": [
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d0ef52c6-6e50-4e1b-b057-d22b3fb95509",
+      "comment": "",
+      "command": "executeAsyncScript",
+      "target": "var form = document.createElement('form'); form.method = 'POST'; form.action = 'http://localhost:8080/prenotazioni/confermaPrenotazione'; form.setAttribute('enctype', 'application/x-www-form-urlencoded');  var currentDate = new Date();  var checkInDate = new Date(currentDate); checkInDate.setDate(currentDate.getDate() + 5);  var checkOutDate = new Date(currentDate); checkOutDate.setDate(currentDate.getDate() + 5);   var checkIn = checkInDate.toISOString().split('T')[0]; var checkOut = checkOutDate.toISOString().split('T')[0];  var numeroCamera = '2'; var numeroOspiti = '2';  var input1 = document.createElement('input'); input1.type = 'hidden'; input1.name = 'numeroCamera'; input1.value = numeroCamera; form.appendChild(input1);  var input2 = document.createElement('input'); input2.type = 'hidden'; input2.name = 'numeroOspiti'; input2.value = numeroOspiti; form.appendChild(input2);  var input3 = document.createElement('input'); input3.type = 'hidden'; input3.name = 'checkIn'; input3.value = checkIn; form.appendChild(input3);  var input4 = document.createElement('input'); input4.type = 'hidden'; input4.name = 'checkOut'; input4.value = checkOut; form.appendChild(input4);  document.body.appendChild(form); form.submit();",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1741c65b-bed6-49f7-a811-624749792536",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.error-code",
+      "targets": [
+        ["css=.error-code", "css:finder"],
+        ["xpath=//div[4]/div", "xpath:position"]
+      ],
+      "value": "Ops qualcosa è andato storto: La data di check-out non può essere uguale alla data di check-in"
+    }, {
+      "id": "2c45f2f4-9faa-41b0-94ea-136ddd3f3b2b",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/logout')]", "xpath:href"],
+        ["xpath=//div[3]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "a414e2a4-0405-430f-a439-57f81d510c59",
+    "name": "TC7",
+    "commands": [{
+      "id": "d68803d1-2774-445c-84fb-b8d7dcc64af7",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "abffdabb-c44b-411e-938a-61b0aa016e3f",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=div > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/login')]", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "91f39089-b490-449f-8c7f-b3d491f795a3",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "21a54794-e292-43ce-9c95-408270194337",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mariorossi@gmail.com"
+    }, {
+      "id": "b72e4ea9-6d75-4bc6-a7b9-e30bf18e5a26",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "39c971c9-7c8e-4e04-b0a5-b58810964ee0",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Mario1234"
+    }, {
+      "id": "ac5bf799-4370-4929-b4b5-e796b6bd7040",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(6)",
+      "targets": [
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "71aeb952-d50c-4b8b-ac8e-1c55f33e7e18",
+      "comment": "",
+      "command": "executeAsyncScript",
+      "target": "var form = document.createElement('form'); form.method = 'POST'; form.action = 'http://localhost:8080/prenotazioni/confermaPrenotazione'; form.setAttribute('enctype', 'application/x-www-form-urlencoded');  var currentDate = new Date();  var checkInDate = new Date(currentDate); checkInDate.setDate(currentDate.getDate() + 5);  var checkOutDate = new Date(currentDate); checkOutDate.setDate(currentDate.getDate() + 10);   var checkIn = checkInDate.toISOString().split('T')[0]; var checkOut = checkOutDate.toISOString().split('T')[0];  var numeroCamera = '2'; var numeroOspiti = '3';  var input1 = document.createElement('input'); input1.type = 'hidden'; input1.name = 'numeroCamera'; input1.value = numeroCamera; form.appendChild(input1);  var input2 = document.createElement('input'); input2.type = 'hidden'; input2.name = 'numeroOspiti'; input2.value = numeroOspiti; form.appendChild(input2);  var input3 = document.createElement('input'); input3.type = 'hidden'; input3.name = 'checkIn'; input3.value = checkIn; form.appendChild(input3);  var input4 = document.createElement('input'); input4.type = 'hidden'; input4.name = 'checkOut'; input4.value = checkOut; form.appendChild(input4);  document.body.appendChild(form); form.submit();",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4c19a769-3e48-4250-96d6-9d437fa1ee90",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.error-code",
+      "targets": [
+        ["css=.error-code", "css:finder"],
+        ["xpath=//div[4]/div", "xpath:position"]
+      ],
+      "value": "Ops qualcosa è andato storto: Il numero di ospiti non può essere maggiore del numero massimo di ospiti della camera"
+    }, {
+      "id": "4623cedf-64ce-4906-905a-1a078a6a83cf",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/logout')]", "xpath:href"],
+        ["xpath=//div[3]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "4d36a3ef-9bd6-42c1-911c-9cdda1669524",
+    "name": "TC9",
+    "commands": [{
+      "id": "9f4a9354-1998-4b1d-bfc4-0a502ba70e5e",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "180c1e39-67a1-4c0c-b970-6b92b25bd5f4",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=div > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/login')]", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ca4a52ae-44b6-43bf-ad77-04c383a7ddb3",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "dba76e1a-af64-46e7-ba21-eec86a3d8b55",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mariorossi@gmail.com"
+    }, {
+      "id": "99acbb2f-dc0e-4606-aa01-7b31c6afa1c0",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "03103a3c-2f7f-4da9-8b79-321956977997",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Mario1234"
+    }, {
+      "id": "85d166c3-87d4-4c64-a895-7868fac7c99d",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(6)",
+      "targets": [
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c29be083-cb74-4224-ae34-9d348938d0c7",
+      "comment": "",
+      "command": "executeAsyncScript",
+      "target": "var form = document.createElement('form'); form.method = 'POST'; form.action = 'http://localhost:8080/prenotazioni/confermaPrenotazione'; form.setAttribute('enctype', 'application/x-www-form-urlencoded');  var currentDate = new Date();  var checkInDate = new Date(currentDate); checkInDate.setDate(currentDate.getDate() + 5);  var checkOutDate = new Date(currentDate); checkOutDate.setDate(currentDate.getDate() + 10);   var checkIn = checkInDate.toISOString().split('T')[0]; var checkOut = checkOutDate.toISOString().split('T')[0];  var numeroCamera = '1'; var numeroOspiti = '2';  var input1 = document.createElement('input'); input1.type = 'hidden'; input1.name = 'numeroCamera'; input1.value = numeroCamera; form.appendChild(input1);  var input2 = document.createElement('input'); input2.type = 'hidden'; input2.name = 'numeroOspiti'; input2.value = numeroOspiti; form.appendChild(input2);  var input3 = document.createElement('input'); input3.type = 'hidden'; input3.name = 'checkIn'; input3.value = checkIn; form.appendChild(input3);  var input4 = document.createElement('input'); input4.type = 'hidden'; input4.name = 'checkOut'; input4.value = checkOut; form.appendChild(input4);  document.body.appendChild(form); form.submit();",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "29c3b686-59b1-4305-afe3-db8aa50b2721",
+      "comment": "",
+      "command": "executeAsyncScript",
+      "target": "var form = document.createElement('form'); form.method = 'POST'; form.action = 'http://localhost:8080/prenotazioni/confermaPrenotazione'; form.setAttribute('enctype', 'application/x-www-form-urlencoded');  var currentDate = new Date();  var checkInDate = new Date(currentDate); checkInDate.setDate(currentDate.getDate() + 5);  var checkOutDate = new Date(currentDate); checkOutDate.setDate(currentDate.getDate() + 10);   var checkIn = checkInDate.toISOString().split('T')[0]; var checkOut = checkOutDate.toISOString().split('T')[0];  var numeroCamera = '1'; var numeroOspiti = '2';  var input1 = document.createElement('input'); input1.type = 'hidden'; input1.name = 'numeroCamera'; input1.value = numeroCamera; form.appendChild(input1);  var input2 = document.createElement('input'); input2.type = 'hidden'; input2.name = 'numeroOspiti'; input2.value = numeroOspiti; form.appendChild(input2);  var input3 = document.createElement('input'); input3.type = 'hidden'; input3.name = 'checkIn'; input3.value = checkIn; form.appendChild(input3);  var input4 = document.createElement('input'); input4.type = 'hidden'; input4.name = 'checkOut'; input4.value = checkOut; form.appendChild(input4);  document.body.appendChild(form); form.submit();",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0a881c2c-7a71-4754-b237-28aac40b7239",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.error-code",
+      "targets": [
+        ["css=.error-code", "css:finder"],
+        ["xpath=//div[4]/div", "xpath:position"]
+      ],
+      "value": "Ops qualcosa è andato storto: La camera non è più disponibile per le date selezionate"
+    }, {
+      "id": "6019caac-7171-4bfe-acb2-c94f83afc987",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/logout')]", "xpath:href"],
+        ["xpath=//div[3]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "89c7c2d2-2732-491f-a263-ff0564440f50",
+    "name": "TC11",
+    "commands": [{
+      "id": "14b2880f-8624-45ce-bed1-32a102dcb9be",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "eea57b6f-c406-4eec-a975-41d3a83f0174",
+      "comment": "",
+      "command": "executeAsyncScript",
+      "target": "var form = document.createElement('form'); form.method = 'POST'; form.action = 'http://localhost:8080/prenotazioni/confermaPrenotazione'; form.setAttribute('enctype', 'application/x-www-form-urlencoded');  var currentDate = new Date();  var checkInDate = new Date(currentDate); checkInDate.setDate(currentDate.getDate() + 5);  var checkOutDate = new Date(currentDate); checkOutDate.setDate(currentDate.getDate() + 10);   var checkIn = checkInDate.toISOString().split('T')[0]; var checkOut = checkOutDate.toISOString().split('T')[0];  var numeroCamera = '2'; var numeroOspiti = '2';  var input1 = document.createElement('input'); input1.type = 'hidden'; input1.name = 'numeroCamera'; input1.value = numeroCamera; form.appendChild(input1);  var input2 = document.createElement('input'); input2.type = 'hidden'; input2.name = 'numeroOspiti'; input2.value = numeroOspiti; form.appendChild(input2);  var input3 = document.createElement('input'); input3.type = 'hidden'; input3.name = 'checkIn'; input3.value = checkIn; form.appendChild(input3);  var input4 = document.createElement('input'); input4.type = 'hidden'; input4.name = 'checkOut'; input4.value = checkOut; form.appendChild(input4);  document.body.appendChild(form); form.submit();",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8e2801eb-afb3-4c58-845f-2842eb80e0d3",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.error-code",
+      "targets": [
+        ["css=.error-code", "css:finder"],
+        ["xpath=//div[4]/div", "xpath:position"]
+      ],
+      "value": "Ops qualcosa è andato storto: Bad Request"
+    }]
+  }, {
+    "id": "92dd0e93-6df9-409a-9786-46fc21115ff8",
+    "name": "TC13",
+    "commands": [{
+      "id": "913fb381-425d-4b10-b0cd-e0d6a1bc9396",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9467e48f-dfc1-4b47-bf5e-af46f7fd191a",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=div > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/login')]", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "94c1f94d-8428-4aac-8cfc-83b570bbb310",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3be8a058-9b5d-412f-a328-de01cad9ef11",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mariorossi@gmail.com"
+    }, {
+      "id": "2e1830cc-92c6-41a7-b3f7-53c6f80158ea",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a51928ba-c8e0-4c4e-9dbc-745c73427693",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Mario1234"
+    }, {
+      "id": "553c4908-b672-494b-8d05-e7813287fff0",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(6)",
+      "targets": [
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4106945b-1a5e-4ca9-894a-5045cdcb1ce9",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Prenota ora",
+      "targets": [
+        ["linkText=Prenota ora", "linkText"],
+        ["css=#prenotaOra > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Prenota ora')]", "xpath:link"],
+        ["xpath=//li[@id='prenotaOra']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/camere/prenota')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Prenota ora')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e74cee14-3856-4660-b671-a5dd777d7338",
+      "comment": "",
+      "command": "click",
+      "target": "id=checkindate",
+      "targets": [
+        ["id=checkindate", "id"],
+        ["name=checkindate", "name"],
+        ["css=#checkindate", "css:finder"],
+        ["xpath=//input[@id='checkindate']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f7b07b85-dfda-413b-86ac-283293face23",
+      "comment": "",
+      "command": "type",
+      "target": "id=checkindate",
+      "targets": [
+        ["id=checkindate", "id"],
+        ["name=checkindate", "name"],
+        ["css=#checkindate", "css:finder"],
+        ["xpath=//input[@id='checkindate']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "2025-01-18"
+    }, {
+      "id": "18b29629-35d0-4bd0-af0a-33b4d14a4a8d",
+      "comment": "",
+      "command": "click",
+      "target": "id=checkoutdate",
+      "targets": [
+        ["id=checkoutdate", "id"],
+        ["name=checkoutdate", "name"],
+        ["css=#checkoutdate", "css:finder"],
+        ["xpath=//input[@id='checkoutdate']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[2]/input", "xpath:idRelative"],
+        ["xpath=//label[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "61295b91-d69f-4668-93cd-56b694c20142",
+      "comment": "",
+      "command": "type",
+      "target": "id=checkoutdate",
+      "targets": [
+        ["id=checkoutdate", "id"],
+        ["name=checkoutdate", "name"],
+        ["css=#checkoutdate", "css:finder"],
+        ["xpath=//input[@id='checkoutdate']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[2]/input", "xpath:idRelative"],
+        ["xpath=//label[2]/input", "xpath:position"]
+      ],
+      "value": "2025-01-23"
+    }, {
+      "id": "45c61ef6-2620-47e2-937e-8caa30a977e9",
+      "comment": "",
+      "command": "click",
+      "target": "id=numOspiti",
+      "targets": [
+        ["id=numOspiti", "id"],
+        ["name=numOspiti", "name"],
+        ["css=#numOspiti", "css:finder"],
+        ["xpath=//input[@id='numOspiti']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[3]/input", "xpath:idRelative"],
+        ["xpath=//label[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4744a475-d953-4627-9351-bd38c32beb2d",
+      "comment": "",
+      "command": "type",
+      "target": "id=numOspiti",
+      "targets": [
+        ["id=numOspiti", "id"],
+        ["name=numOspiti", "name"],
+        ["css=#numOspiti", "css:finder"],
+        ["xpath=//input[@id='numOspiti']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[3]/input", "xpath:idRelative"],
+        ["xpath=//label[3]/input", "xpath:position"]
+      ],
+      "value": "2"
+    }, {
+      "id": "d1be722b-924d-4e74-9e48-1b567835e514",
+      "comment": "",
+      "command": "click",
+      "target": "css=#dateForm > input",
+      "targets": [
+        ["css=#dateForm > input", "css:finder"],
+        ["xpath=//input[@value='Verifica disponibilità']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/input", "xpath:idRelative"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "35986e6d-92ee-4878-974f-03e5f50839b4",
+      "comment": "",
+      "command": "click",
+      "target": "css=.cameraContainer:nth-child(5) .prenotaOra",
+      "targets": [
+        ["css=.cameraContainer:nth-child(5) .prenotaOra", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Prenota ora')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "523e478a-bd6e-496a-86ab-b1e4b37abb0c",
+      "comment": "",
+      "command": "click",
+      "target": "css=button:nth-child(10)",
+      "targets": [
+        ["css=button:nth-child(10)", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='modale']/div/form/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Mostra Riepilogo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ae30a1a0-7249-41c0-953b-c62721f0f51e",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Conferma Prenotazione')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5e5fc1a2-aff2-45c7-8a45-bd359254f1b5",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.conferma-titolo",
+      "targets": [
+        ["css=.conferma-titolo", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Prenotazione Confermata')]", "xpath:innerText"]
+      ],
+      "value": "Prenotazione Confermata"
+    }, {
+      "id": "8702ce3d-5abd-4c33-ac7b-94938028efb2",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/logout')]", "xpath:href"],
+        ["xpath=//div[3]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "a83c78e8-ed9e-435c-9f80-31ef8cb8bfb5",
+    "name": "TC15",
+    "commands": [{
+      "id": "a05777c0-6fbc-4005-96a7-fd83cd666d72",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8a70c1b4-81ea-4e1d-b976-3d479a308c7f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "808x695",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3e1101c9-cc87-4cde-beeb-00d0f19868af",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=div > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/login')]", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "82bc6eb7-cd75-4612-9147-9917e0b823b9",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "43a5bf4a-08ae-4139-b6de-d09a071095c6",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mariorossi@gmail.com"
+    }, {
+      "id": "1bae5933-486d-41b8-8f26-359e126cb039",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f8e5526d-04f7-4802-afb8-bb1cc6fc3fc5",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Mario1234"
+    }, {
+      "id": "d9640f37-c647-405e-9ca6-4a4f506d8afa",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(6)",
+      "targets": [
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4a5b101b-5c44-4c5e-8ae0-50f6366500b5",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Prenota ora",
+      "targets": [
+        ["linkText=Prenota ora", "linkText"],
+        ["css=#prenotaOra > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Prenota ora')]", "xpath:link"],
+        ["xpath=//li[@id='prenotaOra']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/camere/prenota')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Prenota ora')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1cd660ee-cf0f-471e-9d96-f3ac5a8f2e17",
+      "comment": "",
+      "command": "click",
+      "target": "id=checkindate",
+      "targets": [
+        ["id=checkindate", "id"],
+        ["name=checkindate", "name"],
+        ["css=#checkindate", "css:finder"],
+        ["xpath=//input[@id='checkindate']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f5d43218-b7b3-4385-b8a6-fb05aeec0093",
+      "comment": "",
+      "command": "type",
+      "target": "id=checkindate",
+      "targets": [
+        ["id=checkindate", "id"],
+        ["name=checkindate", "name"],
+        ["css=#checkindate", "css:finder"],
+        ["xpath=//input[@id='checkindate']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "2025-01-14"
+    }, {
+      "id": "5adb268d-3c33-4859-b5b7-341fa938075a",
+      "comment": "",
+      "command": "click",
+      "target": "id=checkoutdate",
+      "targets": [
+        ["id=checkoutdate", "id"],
+        ["name=checkoutdate", "name"],
+        ["css=#checkoutdate", "css:finder"],
+        ["xpath=//input[@id='checkoutdate']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[2]/input", "xpath:idRelative"],
+        ["xpath=//label[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cb2d87f0-4ffd-4f82-b643-304031c2f8cb",
+      "comment": "",
+      "command": "type",
+      "target": "id=checkoutdate",
+      "targets": [
+        ["id=checkoutdate", "id"],
+        ["name=checkoutdate", "name"],
+        ["css=#checkoutdate", "css:finder"],
+        ["xpath=//input[@id='checkoutdate']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[2]/input", "xpath:idRelative"],
+        ["xpath=//label[2]/input", "xpath:position"]
+      ],
+      "value": "2025-01-24"
+    }, {
+      "id": "1d0dd29b-6912-4cdf-8a72-8cae5ff7febc",
+      "comment": "",
+      "command": "click",
+      "target": "id=numOspiti",
+      "targets": [
+        ["id=numOspiti", "id"],
+        ["name=numOspiti", "name"],
+        ["css=#numOspiti", "css:finder"],
+        ["xpath=//input[@id='numOspiti']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[3]/input", "xpath:idRelative"],
+        ["xpath=//label[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b230fb65-77db-4492-b3a1-806fca889e12",
+      "comment": "",
+      "command": "type",
+      "target": "id=numOspiti",
+      "targets": [
+        ["id=numOspiti", "id"],
+        ["name=numOspiti", "name"],
+        ["css=#numOspiti", "css:finder"],
+        ["xpath=//input[@id='numOspiti']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[3]/input", "xpath:idRelative"],
+        ["xpath=//label[3]/input", "xpath:position"]
+      ],
+      "value": "2"
+    }, {
+      "id": "2f22c1ec-2ec1-4906-9207-1f2731431774",
+      "comment": "",
+      "command": "click",
+      "target": "css=#dateForm > input",
+      "targets": [
+        ["css=#dateForm > input", "css:finder"],
+        ["xpath=//input[@value='Verifica disponibilità']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/input", "xpath:idRelative"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "057c415d-28be-4e57-b268-ec0933f117bb",
+      "comment": "",
+      "command": "click",
+      "target": "css=.cameraContainer:nth-child(6) .prenotaOra",
+      "targets": [
+        ["css=.cameraContainer:nth-child(6) .prenotaOra", "css:finder"],
+        ["xpath=(//button[@type='button'])[2]", "xpath:attributes"],
+        ["xpath=//div[4]/div[2]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "26c16f55-b6ed-4382-b0ef-df83aa5a965b",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=button:nth-child(10)",
+      "targets": [
+        ["css=button:nth-child(10)", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='modale']/div/form/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Mostra Riepilogo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ff72a37f-00aa-443f-aa1c-ac27d9278907",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=button:nth-child(10)",
+      "targets": [
+        ["css=button:nth-child(10)", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='modale']/div/form/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Mostra Riepilogo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2ec0127e-56e7-478a-b40d-283d9b10e7dc",
+      "comment": "",
+      "command": "select",
+      "target": "name=quantita[1]",
+      "targets": [],
+      "value": "label=2"
+    }, {
+      "id": "c44d1c96-d85b-42de-b75e-a73db8739776",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(1) option:nth-child(3)",
+      "targets": [
+        ["css=tr:nth-child(1) option:nth-child(3)", "css:finder"],
+        ["xpath=//option[@value='2']", "xpath:attributes"],
+        ["xpath=//tbody[@id='serviceModalTbody']/tr/td[3]/select/option[3]", "xpath:idRelative"],
+        ["xpath=//option[3]", "xpath:position"],
+        ["xpath=//option[contains(.,'2')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c044bbec-c003-4510-a20a-4dde5a8aeed6",
+      "comment": "",
+      "command": "select",
+      "target": "name=quantita[4]",
+      "targets": [],
+      "value": "label=1"
+    }, {
+      "id": "11d3344c-42c9-48b9-827b-d29f164ef8b7",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(4) option:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(4) option:nth-child(2)", "css:finder"],
+        ["xpath=(//option[@value='1'])[4]", "xpath:attributes"],
+        ["xpath=//tbody[@id='serviceModalTbody']/tr[4]/td[3]/select/option[2]", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[3]/select/option[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a87cb3df-3747-4e24-974a-eb8262af07a8",
+      "comment": "",
+      "command": "click",
+      "target": "css=button:nth-child(10)",
+      "targets": [
+        ["css=button:nth-child(10)", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='modale']/div/form/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Mostra Riepilogo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "df6c3bb6-7ed7-426e-9db6-778ba794e674",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Conferma Prenotazione')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7de70bb4-8f72-4cdb-9b92-d5968e049fe7",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.conferma-titolo",
+      "targets": [
+        ["css=.conferma-titolo", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Prenotazione Confermata')]", "xpath:innerText"]
+      ],
+      "value": "Prenotazione Confermata"
+    }, {
+      "id": "bac35125-04c1-402b-ad5c-2bdc6fa088a0",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/logout')]", "xpath:href"],
+        ["xpath=//div[3]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "27d13900-c135-4330-a446-af8e075baffc",
+    "name": "TC2",
+    "commands": [{
+      "id": "a592f260-d961-493f-9731-8d62fe3527c0",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2dfdaad7-f860-4309-92c4-2d76f8ad5347",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=div > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/login')]", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1d2a33a3-a8d3-478b-a735-4352c840a466",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a509987c-037d-4cb9-8e39-926b00e38b13",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mariorossi@gmail.com"
+    }, {
+      "id": "f6698eaa-a634-4540-98ca-e464164dfd61",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0eef3ad2-13ad-4b60-89db-5d4de886fc14",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Mario1234"
+    }, {
+      "id": "4be3deea-6ec1-4e60-a45f-7b076b8b7a6c",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(6)",
+      "targets": [
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c6171cd7-fc47-41e0-83ad-e77ea86acae2",
+      "comment": "",
+      "command": "executeAsyncScript",
+      "target": "var form = document.createElement('form'); form.method = 'POST'; form.action = 'http://localhost:8080/prenotazioni/confermaPrenotazione'; form.setAttribute('enctype', 'application/x-www-form-urlencoded');  var currentDate = new Date();  var checkInDate = new Date(currentDate); checkInDate.setDate(currentDate.getDate() - 1);  var checkOutDate = new Date(currentDate); checkOutDate.setDate(currentDate.getDate() + 10);   var checkIn = checkInDate.toISOString().split('T')[0]; var checkOut = checkOutDate.toISOString().split('T')[0];  var numeroCamera = \"2\"; var numeroOspiti = '2';  var input1 = document.createElement('input'); input1.type = 'hidden'; input1.name = 'numeroCamera'; input1.value = numeroCamera; form.appendChild(input1);  var input2 = document.createElement('input'); input2.type = 'hidden'; input2.name = 'numeroOspiti'; input2.value = numeroOspiti; form.appendChild(input2);  var input3 = document.createElement('input'); input3.type = 'hidden'; input3.name = 'checkIn'; input3.value = checkIn; form.appendChild(input3);  var input4 = document.createElement('input'); input4.type = 'hidden'; input4.name = 'checkOut'; input4.value = checkOut; form.appendChild(input4);  document.body.appendChild(form); form.submit();",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "479083bf-3f3d-443d-a189-22250038db7b",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.error-code",
+      "targets": [
+        ["css=.error-code", "css:finder"],
+        ["xpath=//div[4]/div", "xpath:position"]
+      ],
+      "value": "Ops qualcosa è andato storto: La data di check-in non può essere precedente alla data odierna"
+    }, {
+      "id": "3ca9ce85-0c4b-4e0b-9457-51e90245842d",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/logout')]", "xpath:href"],
+        ["xpath=//div[3]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "91aa87a4-f44d-4df6-a988-f6182eb22830",
+    "name": "TC4",
+    "commands": [{
+      "id": "0f44c2c5-4a71-481a-9307-dd8ee5e8888a",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "637478c3-2068-43db-b3b2-f0da4db45433",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=div > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/login')]", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e3c70be5-135c-49b3-8db8-d081e943bb31",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b5dde72d-53fd-4f5c-9cf0-2dd0b651ea0b",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mariorossi@gmail.com"
+    }, {
+      "id": "a0eec5ad-3e4e-4771-bc2c-6aeb0e688c34",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "dee4e283-6fb8-4b7e-876d-951841cb14e6",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Mario1234"
+    }, {
+      "id": "b21a87d1-c874-4283-af68-3944a4f7e30e",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(6)",
+      "targets": [
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f5b2e259-eb8f-4cd1-b73f-c4e81902d4fb",
+      "comment": "",
+      "command": "executeAsyncScript",
+      "target": "var form = document.createElement('form'); form.method = 'POST'; form.action = 'http://localhost:8080/prenotazioni/confermaPrenotazione'; form.setAttribute('enctype', 'application/x-www-form-urlencoded');  var currentDate = new Date();  var checkInDate = new Date(currentDate); checkInDate.setDate(currentDate.getDate() + 5);  var checkOutDate = new Date(currentDate); checkOutDate.setDate(currentDate.getDate() + 2);   var checkIn = checkInDate.toISOString().split('T')[0]; var checkOut = checkOutDate.toISOString().split('T')[0];  var numeroCamera = \"2\"; var numeroOspiti = '2';  var input1 = document.createElement('input'); input1.type = 'hidden'; input1.name = 'numeroCamera'; input1.value = numeroCamera; form.appendChild(input1);  var input2 = document.createElement('input'); input2.type = 'hidden'; input2.name = 'numeroOspiti'; input2.value = numeroOspiti; form.appendChild(input2);  var input3 = document.createElement('input'); input3.type = 'hidden'; input3.name = 'checkIn'; input3.value = checkIn; form.appendChild(input3);  var input4 = document.createElement('input'); input4.type = 'hidden'; input4.name = 'checkOut'; input4.value = checkOut; form.appendChild(input4);  document.body.appendChild(form); form.submit();",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "786cd755-2909-4e75-86fb-2822ee648f99",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.error-code",
+      "targets": [
+        ["css=.error-code", "css:finder"],
+        ["xpath=//div[4]/div", "xpath:position"]
+      ],
+      "value": "Ops qualcosa è andato storto: La data di check-out non può essere precedente alla data di check-in"
+    }, {
+      "id": "6abc3287-9c89-4a6e-b56e-34bfb596dbda",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/logout')]", "xpath:href"],
+        ["xpath=//div[3]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "3dcbe9fe-a844-473d-af79-d9e30f9c68da",
+    "name": "TC6",
+    "commands": [{
+      "id": "bfbef7c7-0dec-4a4c-a320-6f3c6b55554d",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "86b46cf9-bc4e-4a9f-8871-489886fbad74",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=div > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/login')]", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "558f26b8-4e38-48c4-b53a-8fead2dad36e",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ba4e30b6-c4e6-4552-acfe-9b774e9c32fb",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mariorossi@gmail.com"
+    }, {
+      "id": "d8c647fa-7dda-4c5f-be5b-b4d88e186ff3",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c9e6aec6-854f-4bec-8e8c-02abc813636e",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Mario1234"
+    }, {
+      "id": "dd4150d9-ee43-45b7-a765-ea130cc61bf0",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(6)",
+      "targets": [
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3f65e784-0ab7-4877-8128-418ab810a09a",
+      "comment": "",
+      "command": "executeAsyncScript",
+      "target": "var form = document.createElement('form'); form.method = 'POST'; form.action = 'http://localhost:8080/prenotazioni/confermaPrenotazione'; form.setAttribute('enctype', 'application/x-www-form-urlencoded');  var currentDate = new Date();  var checkInDate = new Date(currentDate); checkInDate.setDate(currentDate.getDate() + 5);  var checkOutDate = new Date(currentDate); checkOutDate.setDate(currentDate.getDate() + 10);   var checkIn = checkInDate.toISOString().split('T')[0]; var checkOut = checkOutDate.toISOString().split('T')[0];  var numeroCamera = \"2\"; var numeroOspiti = '0';  var input1 = document.createElement('input'); input1.type = 'hidden'; input1.name = 'numeroCamera'; input1.value = numeroCamera; form.appendChild(input1);  var input2 = document.createElement('input'); input2.type = 'hidden'; input2.name = 'numeroOspiti'; input2.value = numeroOspiti; form.appendChild(input2);  var input3 = document.createElement('input'); input3.type = 'hidden'; input3.name = 'checkIn'; input3.value = checkIn; form.appendChild(input3);  var input4 = document.createElement('input'); input4.type = 'hidden'; input4.name = 'checkOut'; input4.value = checkOut; form.appendChild(input4);  document.body.appendChild(form); form.submit();",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8bdf9bce-e590-4ffe-8e42-5ccc7daf6074",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.error-code",
+      "targets": [
+        ["css=.error-code", "css:finder"],
+        ["xpath=//div[4]/div", "xpath:position"]
+      ],
+      "value": "Ops qualcosa è andato storto: Il numero di ospiti deve essere maggiore di 0"
+    }, {
+      "id": "6948d7b2-4be5-45dc-bada-7f3178c5d36a",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/logout')]", "xpath:href"],
+        ["xpath=//div[3]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "b6c8b08b-6e3d-4611-9e8e-9e8f46694f82",
+    "name": "TC8",
+    "commands": [{
+      "id": "fcf85229-1938-45ae-9646-d6c801a69a9b",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7166304e-ba0a-4847-829e-4c16b5de4fc0",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=div > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/login')]", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7b6346f5-e5bc-416b-9d6a-074133da7144",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "111686d8-137d-4916-9bde-bffdc4332554",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mariorossi@gmail.com"
+    }, {
+      "id": "d965fe5e-ac7e-4f75-b090-2c889abd05a6",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e01d5d41-29fa-4a0c-bd2d-2954d4deb7bf",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Mario1234"
+    }, {
+      "id": "3deacd23-e354-47c5-b82d-d8839eefaa27",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(6)",
+      "targets": [
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "14594d46-44bc-421e-b64a-6ed62b65fd98",
+      "comment": "",
+      "command": "executeAsyncScript",
+      "target": "var form = document.createElement('form'); form.method = 'POST'; form.action = 'http://localhost:8080/prenotazioni/confermaPrenotazione'; form.setAttribute('enctype', 'application/x-www-form-urlencoded');  var currentDate = new Date();  var checkInDate = new Date(currentDate); checkInDate.setDate(currentDate.getDate() + 5);  var checkOutDate = new Date(currentDate); checkOutDate.setDate(currentDate.getDate() + 10);   var checkIn = checkInDate.toISOString().split('T')[0]; var checkOut = checkOutDate.toISOString().split('T')[0];  var numeroCamera = \"0\"; var numeroOspiti = '2';  var input1 = document.createElement('input'); input1.type = 'hidden'; input1.name = 'numeroCamera'; input1.value = numeroCamera; form.appendChild(input1);  var input2 = document.createElement('input'); input2.type = 'hidden'; input2.name = 'numeroOspiti'; input2.value = numeroOspiti; form.appendChild(input2);  var input3 = document.createElement('input'); input3.type = 'hidden'; input3.name = 'checkIn'; input3.value = checkIn; form.appendChild(input3);  var input4 = document.createElement('input'); input4.type = 'hidden'; input4.name = 'checkOut'; input4.value = checkOut; form.appendChild(input4);  document.body.appendChild(form); form.submit();",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "791e4952-e2fe-480d-b8a6-d12b28c9a496",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.error-code",
+      "targets": [
+        ["css=.error-code", "css:finder"],
+        ["xpath=//div[4]/div", "xpath:position"]
+      ],
+      "value": "Ops qualcosa è andato storto: La camera non è selezionata"
+    }, {
+      "id": "effdb639-4195-478d-8f4d-0a0358c639e5",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/logout')]", "xpath:href"],
+        ["xpath=//div[3]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "ce568289-4823-43f5-8836-373286d6ef42",
+    "name": "TC10",
+    "commands": [{
+      "id": "62be6d2f-19c7-4d36-8053-b087b0d1a603",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4cb1df31-48d1-463f-82ec-2b0a99adfc33",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=div > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/login')]", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f2c71048-a6ee-4cba-b22b-0aa5c2e9b5b4",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "85ddd743-cfc6-4f32-b52b-2d2ba28b816f",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mariorossi@gmail.com"
+    }, {
+      "id": "41e7139f-4959-44aa-9e98-baf8c435b7e9",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "43699762-954d-40cd-93f3-085acf168d9d",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Mario1234"
+    }, {
+      "id": "2ed14749-45b6-411b-8f3b-e62be5bd1299",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(6)",
+      "targets": [
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2c9cc2a9-d10d-48a1-a8ba-5de06ea8514f",
+      "comment": "",
+      "command": "executeAsyncScript",
+      "target": "var form = document.createElement('form'); form.method = 'POST'; form.action = 'http://localhost:8080/prenotazioni/confermaPrenotazione'; form.setAttribute('enctype', 'application/x-www-form-urlencoded');  var currentDate = new Date();  var checkInDate = new Date(currentDate); checkInDate.setDate(currentDate.getDate() + 5);  var checkOutDate = new Date(currentDate); checkOutDate.setDate(currentDate.getDate() + 10);   var checkIn = checkInDate.toISOString().split('T')[0]; var checkOut = checkOutDate.toISOString().split('T')[0];  var numeroCamera = \"2\"; var numeroOspiti = '2';  var servizio1Id = \"1\"; var servizio2Id = \"4\"; var quantitaServizio1 = \"3\"; var quantitaServizio2 = \"1\";  var input1 = document.createElement('input'); input1.type = 'hidden'; input1.name = 'numeroCamera'; input1.value = numeroCamera; form.appendChild(input1);  var input2 = document.createElement('input'); input2.type = 'hidden'; input2.name = 'numeroOspiti'; input2.value = numeroOspiti; form.appendChild(input2);  var input3 = document.createElement('input'); input3.type = 'hidden'; input3.name = 'checkIn'; input3.value = checkIn; form.appendChild(input3);  var input4 = document.createElement('input'); input4.type = 'hidden'; input4.name = 'checkOut'; input4.value = checkOut; form.appendChild(input4);  var input5 = document.createElement('input'); input5.type = 'hidden'; input5.name = 'quantita[' + servizio1Id + ']'; input5.value = quantitaServizio1; form.appendChild(input5);  var input6 = document.createElement('input'); input6.type = 'hidden'; input6.name = 'quantita[' + servizio2Id + ']'; input6.value = quantitaServizio2; form.appendChild(input6);  document.body.appendChild(form); form.submit();",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e976a50d-aa4e-4bbb-82cd-4a07244c2375",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.error-code",
+      "targets": [
+        ["css=.error-code", "css:finder"],
+        ["xpath=//div[4]/div", "xpath:position"]
+      ],
+      "value": "Ops qualcosa è andato storto: Il numero di servizi non può essere maggiore del numero di ospiti"
+    }, {
+      "id": "8b1ee39e-2f8e-4b34-a264-4d5791b66c92",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/logout')]", "xpath:href"],
+        ["xpath=//div[3]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "2364b5a7-bb04-4b87-aadc-34da4753d378",
+    "name": "TC12",
+    "commands": [{
+      "id": "e968b200-fcaf-4ea8-aef9-c21b497cee26",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a3f321ce-e014-43a6-92b8-d85b90b8130c",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=div > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/login')]", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "76f87c0e-6aad-4f6b-8584-402db658fec6",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a7289ca6-2d4b-4899-ad45-ce6cc7d51760",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mariorossi@gmail.com"
+    }, {
+      "id": "760fe861-3b92-4e3a-ad7c-163db18e2a70",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "be42dac2-9d5b-40b5-8e4d-267abe466d6a",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Mario1234"
+    }, {
+      "id": "53ff2ca0-13b5-4f31-93e8-c0fde994ef55",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(6)",
+      "targets": [
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "13c7145a-246e-4bdf-be59-3dec2b9f7fb0",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Prenota ora",
+      "targets": [
+        ["linkText=Prenota ora", "linkText"],
+        ["css=#prenotaOra > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Prenota ora')]", "xpath:link"],
+        ["xpath=//li[@id='prenotaOra']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/camere/prenota')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Prenota ora')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "473623d3-bf78-4ddc-8e6f-a2c0d1faea57",
+      "comment": "",
+      "command": "click",
+      "target": "id=checkindate",
+      "targets": [
+        ["id=checkindate", "id"],
+        ["name=checkindate", "name"],
+        ["css=#checkindate", "css:finder"],
+        ["xpath=//input[@id='checkindate']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9e95d47e-9841-40e2-9092-29540c42dd2c",
+      "comment": "",
+      "command": "type",
+      "target": "id=checkindate",
+      "targets": [
+        ["id=checkindate", "id"],
+        ["name=checkindate", "name"],
+        ["css=#checkindate", "css:finder"],
+        ["xpath=//input[@id='checkindate']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "2025-01-14"
+    }, {
+      "id": "93b0fa2a-4ac1-4757-954d-4a39ca45e0d7",
+      "comment": "",
+      "command": "click",
+      "target": "id=checkoutdate",
+      "targets": [
+        ["id=checkoutdate", "id"],
+        ["name=checkoutdate", "name"],
+        ["css=#checkoutdate", "css:finder"],
+        ["xpath=//input[@id='checkoutdate']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[2]/input", "xpath:idRelative"],
+        ["xpath=//label[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7dc0ca6d-b4b0-475e-8730-dafe2cb5203f",
+      "comment": "",
+      "command": "type",
+      "target": "id=checkoutdate",
+      "targets": [
+        ["id=checkoutdate", "id"],
+        ["name=checkoutdate", "name"],
+        ["css=#checkoutdate", "css:finder"],
+        ["xpath=//input[@id='checkoutdate']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[2]/input", "xpath:idRelative"],
+        ["xpath=//label[2]/input", "xpath:position"]
+      ],
+      "value": "2025-01-24"
+    }, {
+      "id": "551cc9da-4f7e-4b1b-959b-008bfd1fdfc5",
+      "comment": "",
+      "command": "type",
+      "target": "id=numOspiti",
+      "targets": [
+        ["id=numOspiti", "id"],
+        ["name=numOspiti", "name"],
+        ["css=#numOspiti", "css:finder"],
+        ["xpath=//input[@id='numOspiti']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[3]/input", "xpath:idRelative"],
+        ["xpath=//label[3]/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "a214fd2b-5524-4e06-8444-c69daf48805d",
+      "comment": "",
+      "command": "click",
+      "target": "id=numOspiti",
+      "targets": [
+        ["id=numOspiti", "id"],
+        ["name=numOspiti", "name"],
+        ["css=#numOspiti", "css:finder"],
+        ["xpath=//input[@id='numOspiti']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[3]/input", "xpath:idRelative"],
+        ["xpath=//label[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d4da3ed5-cf6f-4863-8e27-645753a4c960",
+      "comment": "",
+      "command": "type",
+      "target": "id=numOspiti",
+      "targets": [
+        ["id=numOspiti", "id"],
+        ["name=numOspiti", "name"],
+        ["css=#numOspiti", "css:finder"],
+        ["xpath=//input[@id='numOspiti']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[3]/input", "xpath:idRelative"],
+        ["xpath=//label[3]/input", "xpath:position"]
+      ],
+      "value": "2"
+    }, {
+      "id": "856fffcc-fef5-4e2d-9bfa-c10cdf0723d7",
+      "comment": "",
+      "command": "click",
+      "target": "id=numOspiti",
+      "targets": [
+        ["id=numOspiti", "id"],
+        ["name=numOspiti", "name"],
+        ["css=#numOspiti", "css:finder"],
+        ["xpath=//input[@id='numOspiti']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[3]/input", "xpath:idRelative"],
+        ["xpath=//label[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c5308494-6c70-4754-9a85-1ed9db4cdaec",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "id=numOspiti",
+      "targets": [
+        ["id=numOspiti", "id"],
+        ["name=numOspiti", "name"],
+        ["css=#numOspiti", "css:finder"],
+        ["xpath=//input[@id='numOspiti']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[3]/input", "xpath:idRelative"],
+        ["xpath=//label[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c834ac53-2587-454f-922b-669412356ba4",
+      "comment": "",
+      "command": "click",
+      "target": "css=#dateForm > input",
+      "targets": [
+        ["css=#dateForm > input", "css:finder"],
+        ["xpath=//input[@value='Verifica disponibilità']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/input", "xpath:idRelative"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a9605c24-e16a-4f8c-a641-87e221d6dd94",
+      "comment": "",
+      "command": "click",
+      "target": "css=.cameraContainer:nth-child(6) .prenotaOra",
+      "targets": [
+        ["css=.cameraContainer:nth-child(6) .prenotaOra", "css:finder"],
+        ["xpath=(//button[@type='button'])[2]", "xpath:attributes"],
+        ["xpath=//div[4]/div[2]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "339b8176-0903-4a80-b926-eb8a5f09a781",
+      "comment": "",
+      "command": "click",
+      "target": "css=button:nth-child(10)",
+      "targets": [
+        ["css=button:nth-child(10)", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='modale']/div/form/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Mostra Riepilogo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "be12f4e8-6709-4c5b-a9d2-53955244deb5",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Conferma Prenotazione')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a2dc2455-d885-4d51-ae46-319a41d6f372",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.conferma-titolo",
+      "targets": [
+        ["css=.conferma-titolo", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Prenotazione Confermata')]", "xpath:innerText"]
+      ],
+      "value": "Prenotazione Confermata"
+    }, {
+      "id": "85f5e535-b204-4bae-bbe8-dd164d2fb1a8",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/logout')]", "xpath:href"],
+        ["xpath=//div[3]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "4e5c17ed-e381-45b6-81eb-083d012f26fe",
+    "name": "TC14",
+    "commands": [{
+      "id": "b5276ec6-abae-4eea-8611-c446c83dc477",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fe765337-15fa-4f76-ad62-8964cedb7f9c",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=div > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/login')]", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "fed66e51-fcb4-4eb4-8001-84b59c546a92",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a62ed985-3500-4501-9791-6cfaceaad072",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mariorossi@gmail.com"
+    }, {
+      "id": "2ef9c430-7fc8-4387-b23b-6c3f65dd1d93",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f804f371-5202-400a-818b-3fc514efba54",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Mario1234"
+    }, {
+      "id": "417dd356-5b54-40b4-9462-f7a62591d69b",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(6)",
+      "targets": [
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//form[@id='formLogin']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b5a09b75-1829-48c5-9f7c-e74d703875b6",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Prenota ora",
+      "targets": [
+        ["linkText=Prenota ora", "linkText"],
+        ["css=#prenotaOra > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Prenota ora')]", "xpath:link"],
+        ["xpath=//li[@id='prenotaOra']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/camere/prenota')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Prenota ora')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2ffb89c9-7edd-4f37-ad79-b47cfe25cd68",
+      "comment": "",
+      "command": "click",
+      "target": "id=checkindate",
+      "targets": [
+        ["id=checkindate", "id"],
+        ["name=checkindate", "name"],
+        ["css=#checkindate", "css:finder"],
+        ["xpath=//input[@id='checkindate']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f98369e6-62a5-4504-a497-e7566dc7699f",
+      "comment": "",
+      "command": "click",
+      "target": "id=checkindate",
+      "targets": [
+        ["id=checkindate", "id"],
+        ["name=checkindate", "name"],
+        ["css=#checkindate", "css:finder"],
+        ["xpath=//input[@id='checkindate']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "86c6c30b-d3e0-4d9c-be65-c458873662e3",
+      "comment": "",
+      "command": "click",
+      "target": "id=checkindate",
+      "targets": [
+        ["id=checkindate", "id"],
+        ["name=checkindate", "name"],
+        ["css=#checkindate", "css:finder"],
+        ["xpath=//input[@id='checkindate']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "131b1c78-3752-48fb-9e12-a2f469454b37",
+      "comment": "",
+      "command": "type",
+      "target": "id=checkindate",
+      "targets": [
+        ["id=checkindate", "id"],
+        ["name=checkindate", "name"],
+        ["css=#checkindate", "css:finder"],
+        ["xpath=//input[@id='checkindate']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "2025-01-19"
+    }, {
+      "id": "d0862b42-b2e3-4919-b653-cb00cce44eae",
+      "comment": "",
+      "command": "click",
+      "target": "id=checkoutdate",
+      "targets": [
+        ["id=checkoutdate", "id"],
+        ["name=checkoutdate", "name"],
+        ["css=#checkoutdate", "css:finder"],
+        ["xpath=//input[@id='checkoutdate']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[2]/input", "xpath:idRelative"],
+        ["xpath=//label[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4cd91687-c9bc-4d69-814e-9d296ded67d5",
+      "comment": "",
+      "command": "type",
+      "target": "id=checkoutdate",
+      "targets": [
+        ["id=checkoutdate", "id"],
+        ["name=checkoutdate", "name"],
+        ["css=#checkoutdate", "css:finder"],
+        ["xpath=//input[@id='checkoutdate']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[2]/input", "xpath:idRelative"],
+        ["xpath=//label[2]/input", "xpath:position"]
+      ],
+      "value": "2025-01-24"
+    }, {
+      "id": "b70e5f4f-179e-4fb0-bf7b-925106d4a0a6",
+      "comment": "",
+      "command": "click",
+      "target": "id=numOspiti",
+      "targets": [
+        ["id=numOspiti", "id"],
+        ["name=numOspiti", "name"],
+        ["css=#numOspiti", "css:finder"],
+        ["xpath=//input[@id='numOspiti']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[3]/input", "xpath:idRelative"],
+        ["xpath=//label[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4cfc2d23-f1ce-4d48-be39-3e47bf88dc73",
+      "comment": "",
+      "command": "type",
+      "target": "id=numOspiti",
+      "targets": [
+        ["id=numOspiti", "id"],
+        ["name=numOspiti", "name"],
+        ["css=#numOspiti", "css:finder"],
+        ["xpath=//input[@id='numOspiti']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/label[3]/input", "xpath:idRelative"],
+        ["xpath=//label[3]/input", "xpath:position"]
+      ],
+      "value": "2"
+    }, {
+      "id": "de22c2fc-e8c3-4a42-9e2b-764e67bab093",
+      "comment": "",
+      "command": "click",
+      "target": "css=#dateForm > input",
+      "targets": [
+        ["css=#dateForm > input", "css:finder"],
+        ["xpath=//input[@value='Verifica disponibilità']", "xpath:attributes"],
+        ["xpath=//form[@id='dateForm']/input", "xpath:idRelative"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7f8c0d99-52b8-4bd2-ac00-e61014f0bd3b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.cameraContainer:nth-child(6) .prenotaOra",
+      "targets": [
+        ["css=.cameraContainer:nth-child(6) .prenotaOra", "css:finder"],
+        ["xpath=(//button[@type='button'])[2]", "xpath:attributes"],
+        ["xpath=//div[4]/div[2]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d37b9441-9106-491d-a02a-e2baa0afbe77",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=button:nth-child(10)",
+      "targets": [
+        ["css=button:nth-child(10)", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='modale']/div/form/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Mostra Riepilogo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2bfef433-b624-467f-af4f-3b61d46a35b1",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=button:nth-child(10)",
+      "targets": [
+        ["css=button:nth-child(10)", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='modale']/div/form/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Mostra Riepilogo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2ac45246-232f-4ed9-8c95-e182fa78dd66",
+      "comment": "",
+      "command": "click",
+      "target": "name=quantita[1]",
+      "targets": [
+        ["name=quantita[1]", "name"],
+        ["css=tr:nth-child(1) .quantita-select", "css:finder"],
+        ["xpath=//select[@name='quantita[1]']", "xpath:attributes"],
+        ["xpath=//tbody[@id='serviceModalTbody']/tr/td[3]/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "920c1aca-a00d-4f81-aa67-127fdd71ba22",
+      "comment": "",
+      "command": "select",
+      "target": "name=quantita[1]",
+      "targets": [],
+      "value": "label=2"
+    }, {
+      "id": "5fc2d921-9f32-40f7-a4b9-a829a0043e0b",
+      "comment": "",
+      "command": "click",
+      "target": "name=quantita[4]",
+      "targets": [
+        ["name=quantita[4]", "name"],
+        ["css=tr:nth-child(4) .quantita-select", "css:finder"],
+        ["xpath=//select[@name='quantita[4]']", "xpath:attributes"],
+        ["xpath=//tbody[@id='serviceModalTbody']/tr[4]/td[3]/select", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[3]/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c1d918b1-501c-4192-a8cd-24ed61b8b6d0",
+      "comment": "",
+      "command": "select",
+      "target": "name=quantita[4]",
+      "targets": [],
+      "value": "label=1"
+    }, {
+      "id": "43d0bcef-721b-4830-9bee-f2f485e29191",
+      "comment": "",
+      "command": "click",
+      "target": "css=button:nth-child(10)",
+      "targets": [
+        ["css=button:nth-child(10)", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='modale']/div/form/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Mostra Riepilogo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "569fe4c3-628d-481e-8677-331fd07e9ceb",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Conferma Prenotazione')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0868e684-7f05-4b9d-8ca8-e64c4ee7837b",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.conferma-titolo",
+      "targets": [
+        ["css=.conferma-titolo", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Prenotazione Confermata')]", "xpath:innerText"]
+      ],
+      "value": "Prenotazione Confermata"
+    }, {
+      "id": "c861eefe-f460-4185-9e4a-07172cab579a",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/utenti/logout')]", "xpath:href"],
+        ["xpath=//div[3]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "f6401a05-b0cc-45ac-9780-e6fb99433d04",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://localhost:8080/"],
+  "plugins": []
+}
