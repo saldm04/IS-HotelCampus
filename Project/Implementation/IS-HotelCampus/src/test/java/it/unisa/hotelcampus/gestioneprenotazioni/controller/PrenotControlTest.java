@@ -29,8 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(it.unisa.hotelcampus.gestioneprenotazioni.controller.PrenotazioniController.class)
 public class PrenotControlTest {
-
-
+  
   @Autowired
   private MockMvc mockMvc;
 
